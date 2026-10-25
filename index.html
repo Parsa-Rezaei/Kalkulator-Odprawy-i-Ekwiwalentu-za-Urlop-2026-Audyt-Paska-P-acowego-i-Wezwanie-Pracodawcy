@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Polityka bezpieczeństwa: tylko własne pliki, brak skryptów i stylów z zewnątrz -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Kalkulator Odprawy i Ekwiwalentu za Urlop 2026/2027 – Audyt Rozliczenia + Wezwanie do Zapłaty</title>
 <meta name="description" content="Oblicz odprawę (1×, 2× lub 3× pensji, limit 72 090 zł w 2026 i 74 250 zł w 2027 r.) oraz ekwiwalent za urlop (współczynnik 20,92). Sprawdź, czy pracodawca nie zaniżył wypłaty, policz odsetki 9,25% i pobierz przedsądowe wezwanie do zapłaty w PDF.">
 <meta name="robots" content="index, follow">
@@ -14,38 +17,7 @@
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23065f46'/%3E%3Ctext x='32' y='44' font-family='Arial' font-size='34' font-weight='700' fill='white' text-anchor='middle'%3E%C2%A7%3C/text%3E%3C/svg%3E">
 
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.3/dist/index.global.js"></script>
-
-<style>
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: #f8fafc; color: #0f172a; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
-  .inp { width: 100%; box-sizing: border-box; border: 1px solid #cbd5e1; border-radius: .6rem; padding: .55rem .75rem; font-size: .95rem; line-height: 1.4; background: #fff; color: #0f172a; font-variant-numeric: tabular-nums; }
-  .inp:focus { outline: 2px solid #10b981; outline-offset: 1px; border-color: #10b981; }
-  .inp:disabled { background: #f1f5f9; color: #64748b; }
-  .inp.bad { border-color: #e11d48; }
-  .lbl { display: block; font-size: .8rem; font-weight: 600; color: #334155; margin-bottom: .3rem; }
-  .hint { font-size: .75rem; color: #64748b; margin-top: .3rem; line-height: 1.4; }
-  .num { font-variant-numeric: tabular-nums; }
-  .chk { width: 1.05rem; height: 1.05rem; accent-color: #047857; flex: none; margin-top: .15rem; }
-  table.calc { width: 100%; border-collapse: collapse; font-size: .875rem; }
-  table.calc th { text-align: left; font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; color: #64748b; font-weight: 600; padding: .5rem .5rem; border-bottom: 1px solid #e2e8f0; }
-  table.calc th.r { text-align: right; }
-  table.calc td { padding: .55rem .5rem; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
-  table.calc td.v { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 600; }
-  table.calc td.f { color: #475569; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .78rem; }
-  table.calc tr.total td { border-top: 2px solid #0f172a; border-bottom: none; font-weight: 700; }
-  @media (max-width: 640px) {
-    table.calc { font-size: .8rem; }
-    table.calc th, table.calc td { padding: .45rem .3rem; }
-    table.calc td.f { font-size: .7rem; word-break: break-word; }
-  }
-  .paper { font-family: Georgia, "Times New Roman", serif; }
-  details > summary { cursor: pointer; list-style: none; }
-  details > summary::-webkit-details-marker { display: none; }
-  details[open] .chev { transform: rotate(180deg); }
-  [hidden] { display: none !important; }
-  @media print { header, footer, #paywall, .no-print { display: none !important; } }
-</style>
+<link rel="stylesheet" href="assets/app.css">
 
 <script type="application/ld+json">
 {
@@ -125,7 +97,7 @@
     {
       "@type": "Question",
       "name": "Czy kalkulator wysyła gdzieś moje dane?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Nie. Wszystkie obliczenia i generowanie PDF odbywają się lokalnie w Twojej przeglądarce. Wpisane dane mogą być zapamiętane wyłącznie w pamięci tej przeglądarki i możesz je w każdej chwili usunąć przyciskiem „Wyczyść dane”." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Nie. Wszystkie obliczenia i generowanie PDF odbywają się lokalnie w Twojej przeglądarce. Strona nie ładuje skryptów z zewnętrznych serwerów. Dane są zapamiętywane w pamięci tej przeglądarki tylko wtedy, gdy zaznaczysz taką opcję (numer konta nigdy), i możesz je w każdej chwili usunąć przyciskiem „Wyczyść dane”." }
     }
   ]
 }
@@ -178,6 +150,7 @@
       <button type="button" data-example="B" class="rounded-lg bg-white ring-1 ring-slate-300 hover:ring-emerald-500 px-3 py-1.5">Zaniżona odprawa (umowa do 30.09.2026)</button>
       <button type="button" data-example="A" class="rounded-lg bg-white ring-1 ring-slate-300 hover:ring-emerald-500 px-3 py-1.5">Wypowiedzenie X 2026 → limit 2027</button>
       <button type="button" id="btnClear" class="rounded-lg text-rose-700 hover:bg-rose-50 px-3 py-1.5 ml-auto">Wyczyść dane</button>
+      <label class="w-full flex gap-2 items-start text-xs text-slate-600"><input type="checkbox" class="chk" id="remember"> <span>Zapamiętaj wpisane dane na tym urządzeniu (bez numeru konta). Nie zaznaczaj na komputerze współdzielonym.</span></label>
     </div>
 
     <!-- ========== KROK 1 ========== -->
@@ -210,7 +183,7 @@
             <option value="0.25">1/4 etatu</option>
             <option value="custom">Inny wymiar…</option>
           </select>
-          <input class="inp mt-2" id="etatCustom" placeholder="np. 3/5 lub 0,6" hidden>
+          <input class="inp mt-2" id="etatCustom" placeholder="np. 3/5 lub 0,6" maxlength="12" hidden>
         </div>
         <div>
           <label class="lbl" for="norma">Dobowa norma czasu pracy</label>
@@ -239,9 +212,9 @@
         <summary class="text-sm font-semibold text-slate-700 flex items-center justify-between">Dodatkowe okresy wliczane do stażu u tego pracodawcy <span class="chev transition">▾</span></summary>
         <p class="hint mt-2">Np. wcześniejsze umowy z tym samym pracodawcą, zatrudnienie u poprzednika przy przejściu zakładu pracy (art. 23¹ K.p.) albo okres objęty odszkodowaniem za skrócone wypowiedzenie (art. 36¹ § 1 K.p.). Okres wypowiedzenia do daty rozwiązania umowy jest już uwzględniony automatycznie.</p>
         <div class="mt-3 grid grid-cols-3 gap-3 max-w-md">
-          <div><label class="lbl" for="extraY">Lata</label><input class="inp" id="extraY" inputmode="numeric" placeholder="0"></div>
-          <div><label class="lbl" for="extraM">Miesiące</label><input class="inp" id="extraM" inputmode="numeric" placeholder="0"></div>
-          <div><label class="lbl" for="extraD">Dni</label><input class="inp" id="extraD" inputmode="numeric" placeholder="0"></div>
+          <div><label class="lbl" for="extraY">Lata</label><input class="inp" id="extraY" inputmode="numeric" placeholder="0" maxlength="3"></div>
+          <div><label class="lbl" for="extraM">Miesiące</label><input class="inp" id="extraM" inputmode="numeric" placeholder="0" maxlength="4"></div>
+          <div><label class="lbl" for="extraD">Dni</label><input class="inp" id="extraD" inputmode="numeric" placeholder="0" maxlength="5"></div>
         </div>
       </details>
     </section>
@@ -255,26 +228,26 @@
       <div class="mt-2 grid gap-4 sm:grid-cols-2">
         <div>
           <label class="lbl" for="fixedSalary">Wynagrodzenie zasadnicze (brutto / mies.)</label>
-          <input class="inp" id="fixedSalary" inputmode="decimal" placeholder="np. 6000">
+          <input class="inp" id="fixedSalary" inputmode="decimal" placeholder="np. 6000" maxlength="16">
         </div>
         <div>
           <label class="lbl" for="fixedOther">Inne stałe dodatki miesięczne</label>
-          <input class="inp" id="fixedOther" inputmode="decimal" placeholder="np. dodatek funkcyjny, stażowy">
+          <input class="inp" id="fixedOther" inputmode="decimal" placeholder="np. dodatek funkcyjny, stażowy" maxlength="16">
         </div>
       </div>
 
       <h3 class="mt-5 text-sm font-bold text-slate-800">b) Składniki zmienne miesięczne – średnia z 3 miesięcy poprzedzających miesiąc rozwiązania</h3>
       <p class="hint">Premie regulaminowe, prowizje, wynagrodzenie i dodatki za nadgodziny, dodatki za pracę w nocy itp. – kwoty wypłacone za dany miesiąc.</p>
       <div class="mt-2 grid gap-4 sm:grid-cols-3">
-        <div><label class="lbl" for="var1" id="lblVar1">Miesiąc −3</label><input class="inp" id="var1" inputmode="decimal" placeholder="0"></div>
-        <div><label class="lbl" for="var2" id="lblVar2">Miesiąc −2</label><input class="inp" id="var2" inputmode="decimal" placeholder="0"></div>
-        <div><label class="lbl" for="var3" id="lblVar3">Miesiąc −1</label><input class="inp" id="var3" inputmode="decimal" placeholder="0"></div>
+        <div><label class="lbl" for="var1" id="lblVar1">Miesiąc −3</label><input class="inp" id="var1" inputmode="decimal" placeholder="0" maxlength="16"></div>
+        <div><label class="lbl" for="var2" id="lblVar2">Miesiąc −2</label><input class="inp" id="var2" inputmode="decimal" placeholder="0" maxlength="16"></div>
+        <div><label class="lbl" for="var3" id="lblVar3">Miesiąc −1</label><input class="inp" id="var3" inputmode="decimal" placeholder="0" maxlength="16"></div>
       </div>
       <label class="mt-3 flex gap-2.5 items-start text-sm"><input type="checkbox" class="chk" id="topUp"> <span>Byłem/byłam nieobecny(-a) w tych miesiącach (np. L4) i składniki zmienne są przez to niższe – <b>zastosuj dopełnienie podstawy</b></span></label>
       <div id="topUpBox" class="mt-3 grid gap-3 sm:grid-cols-3" hidden>
-        <div class="rounded-xl bg-slate-50 p-3 ring-1 ring-slate-200"><p class="text-xs font-semibold text-slate-600" id="lblTop1">Miesiąc −3</p><div class="mt-2 grid grid-cols-2 gap-2"><div><label class="lbl" for="dw1">Dni przepracowane</label><input class="inp" id="dw1" inputmode="numeric"></div><div><label class="lbl" for="dn1">Dni nominalne</label><input class="inp" id="dn1" inputmode="numeric"></div></div></div>
-        <div class="rounded-xl bg-slate-50 p-3 ring-1 ring-slate-200"><p class="text-xs font-semibold text-slate-600" id="lblTop2">Miesiąc −2</p><div class="mt-2 grid grid-cols-2 gap-2"><div><label class="lbl" for="dw2">Dni przepracowane</label><input class="inp" id="dw2" inputmode="numeric"></div><div><label class="lbl" for="dn2">Dni nominalne</label><input class="inp" id="dn2" inputmode="numeric"></div></div></div>
-        <div class="rounded-xl bg-slate-50 p-3 ring-1 ring-slate-200"><p class="text-xs font-semibold text-slate-600" id="lblTop3">Miesiąc −1</p><div class="mt-2 grid grid-cols-2 gap-2"><div><label class="lbl" for="dw3">Dni przepracowane</label><input class="inp" id="dw3" inputmode="numeric"></div><div><label class="lbl" for="dn3">Dni nominalne</label><input class="inp" id="dn3" inputmode="numeric"></div></div></div>
+        <div class="rounded-xl bg-slate-50 p-3 ring-1 ring-slate-200"><p class="text-xs font-semibold text-slate-600" id="lblTop1">Miesiąc −3</p><div class="mt-2 grid grid-cols-2 gap-2"><div><label class="lbl" for="dw1">Dni przepracowane</label><input class="inp" id="dw1" inputmode="numeric" maxlength="4"></div><div><label class="lbl" for="dn1">Dni nominalne</label><input class="inp" id="dn1" inputmode="numeric" maxlength="4"></div></div></div>
+        <div class="rounded-xl bg-slate-50 p-3 ring-1 ring-slate-200"><p class="text-xs font-semibold text-slate-600" id="lblTop2">Miesiąc −2</p><div class="mt-2 grid grid-cols-2 gap-2"><div><label class="lbl" for="dw2">Dni przepracowane</label><input class="inp" id="dw2" inputmode="numeric" maxlength="4"></div><div><label class="lbl" for="dn2">Dni nominalne</label><input class="inp" id="dn2" inputmode="numeric" maxlength="4"></div></div></div>
+        <div class="rounded-xl bg-slate-50 p-3 ring-1 ring-slate-200"><p class="text-xs font-semibold text-slate-600" id="lblTop3">Miesiąc −1</p><div class="mt-2 grid grid-cols-2 gap-2"><div><label class="lbl" for="dw3">Dni przepracowane</label><input class="inp" id="dw3" inputmode="numeric" maxlength="4"></div><div><label class="lbl" for="dn3">Dni nominalne</label><input class="inp" id="dn3" inputmode="numeric" maxlength="4"></div></div></div>
         <p class="hint sm:col-span-3">Dopełnienie: (suma składników zmiennych ÷ dni przepracowane) × dni nominalne do przepracowania ÷ 3.</p>
       </div>
 
@@ -282,7 +255,7 @@
       <div class="mt-2 grid gap-4 sm:grid-cols-2">
         <div>
           <label class="lbl" for="long12" id="lblLong12">Suma premii kwartalnych / półrocznych / rocznych wypłaconych w ostatnich 12 miesiącach</label>
-          <input class="inp" id="long12" inputmode="decimal" placeholder="0">
+          <input class="inp" id="long12" inputmode="decimal" placeholder="0" maxlength="16">
           <p class="hint">Bez nagród jubileuszowych, „trzynastki”, nagród uznaniowych i jednorazowych wypłat za określone osiągnięcie (§ 6 rozporządzenia).</p>
         </div>
         <div id="baseMini" class="rounded-xl bg-emerald-50 ring-1 ring-emerald-200 p-4 self-start" aria-live="polite"></div>
@@ -302,17 +275,17 @@
         </div>
         <div id="leaveDaysBox">
           <label class="lbl" for="leaveDays">Liczba dni niewykorzystanego urlopu</label>
-          <input class="inp" id="leaveDays" inputmode="decimal" placeholder="np. 10">
+          <input class="inp" id="leaveDays" inputmode="decimal" placeholder="np. 10" maxlength="7">
           <p class="hint" id="leaveDaysHint">1 dzień urlopu = 8 godzin.</p>
         </div>
         <div id="leaveHoursBox" hidden>
           <label class="lbl" for="leaveHours">Liczba godzin niewykorzystanego urlopu</label>
-          <input class="inp" id="leaveHours" inputmode="decimal" placeholder="np. 80">
+          <input class="inp" id="leaveHours" inputmode="decimal" placeholder="np. 80" maxlength="8">
         </div>
         <div>
           <label class="lbl" for="payDay">Dzień wypłaty pensji u pracodawcy</label>
           <div class="flex gap-2">
-            <input class="inp w-20" id="payDay" inputmode="numeric" placeholder="10">
+            <input class="inp w-20" id="payDay" inputmode="numeric" placeholder="10" maxlength="2">
             <select class="inp" id="payMode">
               <option value="next">następnego miesiąca (z dołu)</option>
               <option value="same">tego samego miesiąca</option>
@@ -326,8 +299,8 @@
         <summary class="text-sm font-semibold text-slate-700 flex items-center justify-between">Nie wiesz, ile dni urlopu Ci przysługuje? Policz urlop proporcjonalny <span class="chev transition">▾</span></summary>
         <div class="mt-3 grid gap-3 sm:grid-cols-4">
           <div><label class="lbl" for="lvAnnual">Roczny wymiar</label><select class="inp" id="lvAnnual"><option value="26">26 dni (staż ≥ 10 lat)</option><option value="20">20 dni (staż &lt; 10 lat)</option></select></div>
-          <div><label class="lbl" for="lvCarry">Zaległy urlop z lat ubiegłych (dni)</label><input class="inp" id="lvCarry" inputmode="decimal" placeholder="0"></div>
-          <div><label class="lbl" for="lvUsed">Wykorzystane w roku rozwiązania (dni)</label><input class="inp" id="lvUsed" inputmode="decimal" placeholder="0"></div>
+          <div><label class="lbl" for="lvCarry">Zaległy urlop z lat ubiegłych (dni)</label><input class="inp" id="lvCarry" inputmode="decimal" placeholder="0" maxlength="6"></div>
+          <div><label class="lbl" for="lvUsed">Wykorzystane w roku rozwiązania (dni)</label><input class="inp" id="lvUsed" inputmode="decimal" placeholder="0" maxlength="6"></div>
           <div class="flex items-end"><button type="button" id="btnLeaveApply" class="w-full rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-semibold px-3 py-2.5">Wstaw wynik</button></div>
         </div>
         <p class="hint mt-2" id="leaveHelperOut"></p>
@@ -386,12 +359,12 @@
       <h2 class="text-lg font-bold flex items-center gap-2"><span class="inline-grid place-items-center w-7 h-7 rounded-full bg-rose-100 text-rose-800 text-sm">5</span> Audyt rozliczenia – ile faktycznie wypłacił pracodawca?</h2>
       <p class="hint">Wpisz kwoty brutto z ostatniego paska płacowego (lub z oferty pracodawcy). Puste pole = nic nie wypłacono.</p>
       <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <div><label class="lbl" for="paidEkw">Wypłacony ekwiwalent (brutto)</label><input class="inp" id="paidEkw" inputmode="decimal" placeholder="np. 2868"></div>
-        <div id="paidOdpBox"><label class="lbl" for="paidOdp">Wypłacona odprawa (brutto)</label><input class="inp" id="paidOdp" inputmode="decimal" placeholder="np. 18000"></div>
-        <div id="paidEmerBox" hidden><label class="lbl" for="paidEmer">Wypłacona odprawa emerytalno-rentowa (brutto)</label><input class="inp" id="paidEmer" inputmode="decimal" placeholder="0"></div>
-        <div><label class="lbl" for="empBase">Podstawa przyjęta przez pracodawcę (opcjonalnie)</label><input class="inp" id="empBase" inputmode="decimal" placeholder="np. 6000"></div>
+        <div><label class="lbl" for="paidEkw">Wypłacony ekwiwalent (brutto)</label><input class="inp" id="paidEkw" inputmode="decimal" placeholder="np. 2868" maxlength="16"></div>
+        <div id="paidOdpBox"><label class="lbl" for="paidOdp">Wypłacona odprawa (brutto)</label><input class="inp" id="paidOdp" inputmode="decimal" placeholder="np. 18000" maxlength="16"></div>
+        <div id="paidEmerBox" hidden><label class="lbl" for="paidEmer">Wypłacona odprawa emerytalno-rentowa (brutto)</label><input class="inp" id="paidEmer" inputmode="decimal" placeholder="0" maxlength="16"></div>
+        <div><label class="lbl" for="empBase">Podstawa przyjęta przez pracodawcę (opcjonalnie)</label><input class="inp" id="empBase" inputmode="decimal" placeholder="np. 6000" maxlength="16"></div>
         <div><label class="lbl" for="calcDate">Odsetki liczone na dzień</label><input class="inp" type="date" id="calcDate"></div>
-        <div><label class="lbl" for="rate">Odsetki ustawowe za opóźnienie (% rocznie)</label><input class="inp" id="rate" inputmode="decimal" placeholder="9,25"><p class="hint">Od 5.03.2026: stopa referencyjna NBP 3,75% + 5,5 p.p. = 9,25%.</p></div>
+        <div><label class="lbl" for="rate">Odsetki ustawowe za opóźnienie (% rocznie)</label><input class="inp" id="rate" inputmode="decimal" placeholder="9,25" maxlength="6"><p class="hint">Od 5.03.2026: stopa referencyjna NBP 3,75% + 5,5 p.p. = 9,25%.</p></div>
       </div>
       <details class="mt-3 rounded-xl bg-slate-50 ring-1 ring-slate-200 px-4 py-3">
         <summary class="text-sm font-semibold text-slate-700 flex items-center justify-between">Własne daty wymagalności (opcjonalnie) <span class="chev transition">▾</span></summary>
@@ -415,26 +388,26 @@
       <div class="mt-5 grid gap-6 md:grid-cols-2">
         <fieldset class="space-y-3">
           <legend class="text-sm font-bold text-slate-800 mb-1">Pracownik (nadawca)</legend>
-          <div><label class="lbl" for="empName">Imię i nazwisko *</label><input class="inp" id="empName" autocomplete="name"></div>
-          <div><label class="lbl" for="empStreet">Ulica i numer</label><input class="inp" id="empStreet" autocomplete="address-line1"></div>
-          <div><label class="lbl" for="empCity">Kod pocztowy i miejscowość</label><input class="inp" id="empCity" placeholder="00-000 Miasto"></div>
-          <div><label class="lbl" for="empContact">E-mail / telefon (opcjonalnie)</label><input class="inp" id="empContact"></div>
+          <div><label class="lbl" for="empName">Imię i nazwisko *</label><input class="inp" id="empName" autocomplete="name" maxlength="100"></div>
+          <div><label class="lbl" for="empStreet">Ulica i numer</label><input class="inp" id="empStreet" autocomplete="address-line1" maxlength="120"></div>
+          <div><label class="lbl" for="empCity">Kod pocztowy i miejscowość</label><input class="inp" id="empCity" placeholder="00-000 Miasto" maxlength="80"></div>
+          <div><label class="lbl" for="empContact">E-mail / telefon (opcjonalnie)</label><input class="inp" id="empContact" maxlength="100"></div>
           <div><label class="lbl" for="gender">Forma gramatyczna w piśmie</label><select class="inp" id="gender"><option value="m">męska (byłem zatrudniony)</option><option value="f">żeńska (byłam zatrudniona)</option></select></div>
         </fieldset>
         <fieldset class="space-y-3">
           <legend class="text-sm font-bold text-slate-800 mb-1">Pracodawca (adresat)</legend>
-          <div><label class="lbl" for="erName">Nazwa pracodawcy *</label><input class="inp" id="erName" placeholder="np. ABC Sp. z o.o."></div>
-          <div><label class="lbl" for="erStreet">Ulica i numer</label><input class="inp" id="erStreet"></div>
-          <div><label class="lbl" for="erCity">Kod pocztowy i miejscowość</label><input class="inp" id="erCity"></div>
-          <div><label class="lbl" for="erNip">NIP / KRS (opcjonalnie)</label><input class="inp" id="erNip"></div>
-          <div><label class="lbl" for="reasonText">Przyczyna rozwiązania (opis)</label><input class="inp" id="reasonText" placeholder="likwidacja stanowiska pracy"></div>
+          <div><label class="lbl" for="erName">Nazwa pracodawcy *</label><input class="inp" id="erName" placeholder="np. ABC Sp. z o.o." maxlength="160"></div>
+          <div><label class="lbl" for="erStreet">Ulica i numer</label><input class="inp" id="erStreet" maxlength="120"></div>
+          <div><label class="lbl" for="erCity">Kod pocztowy i miejscowość</label><input class="inp" id="erCity" maxlength="80"></div>
+          <div><label class="lbl" for="erNip">NIP / KRS (opcjonalnie)</label><input class="inp" id="erNip" maxlength="40"></div>
+          <div><label class="lbl" for="reasonText">Przyczyna rozwiązania (opis)</label><input class="inp" id="reasonText" placeholder="likwidacja stanowiska pracy" maxlength="160"></div>
         </fieldset>
       </div>
       <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="lg:col-span-2"><label class="lbl" for="iban">Numer rachunku bankowego (IBAN) *</label><input class="inp" id="iban" placeholder="PL00 0000 0000 0000 0000 0000 0000" autocomplete="off"><p class="hint" id="ibanHint"></p></div>
-        <div><label class="lbl" for="place">Miejscowość pisma</label><input class="inp" id="place" placeholder="Warszawa"></div>
+        <div class="lg:col-span-2"><label class="lbl" for="iban">Numer rachunku bankowego (IBAN) *</label><input class="inp" id="iban" placeholder="PL00 0000 0000 0000 0000 0000 0000" autocomplete="off" spellcheck="false" maxlength="42"><p class="hint" id="ibanHint"></p></div>
+        <div><label class="lbl" for="place">Miejscowość pisma</label><input class="inp" id="place" placeholder="Warszawa" maxlength="60"></div>
         <div><label class="lbl" for="letterDate">Data pisma</label><input class="inp" type="date" id="letterDate"></div>
-        <div><label class="lbl" for="payDays">Termin zapłaty (dni od doręczenia)</label><input class="inp" id="payDays" inputmode="numeric" placeholder="7"></div>
+        <div><label class="lbl" for="payDays">Termin zapłaty (dni od doręczenia)</label><input class="inp" id="payDays" inputmode="numeric" placeholder="7" maxlength="2"></div>
       </div>
 
       <div class="mt-5">
@@ -537,7 +510,7 @@
     <details class="bg-white rounded-2xl ring-1 ring-slate-200 p-5"><summary class="font-semibold flex justify-between gap-4">Czy od odprawy pobiera się składki ZUS i podatek? <span class="chev transition">▾</span></summary><p class="mt-3 text-sm text-slate-700">Odprawa z tytułu rozwiązania stosunku pracy z przyczyn niedotyczących pracownika oraz odprawa emerytalno-rentowa są zwolnione ze składek ZUS i składki zdrowotnej. Podlegają natomiast podatkowi PIT (12% lub 32%), z wyjątkiem osób do 26. roku życia objętych ulgą dla młodych (do 85 528 zł przychodu rocznie). Ekwiwalent za urlop podlega składkom ZUS, składce zdrowotnej i PIT.</p></details>
     <details class="bg-white rounded-2xl ring-1 ring-slate-200 p-5"><summary class="font-semibold flex justify-between gap-4">Czy premie, prowizje i nadgodziny wchodzą do podstawy odprawy i ekwiwalentu? <span class="chev transition">▾</span></summary><p class="mt-3 text-sm text-slate-700">Tak. Składniki stałe uwzględnia się w wysokości należnej w miesiącu rozwiązania umowy, składniki zmienne za okresy nie dłuższe niż miesiąc (premie regulaminowe, prowizje, wynagrodzenie za nadgodziny) – w średniej z 3 miesięcy poprzedzających ten miesiąc, a składniki za okresy dłuższe (premie kwartalne, roczne) – w średniej z 12 miesięcy. Nie wlicza się m.in. nagród jubileuszowych, jednorazowych wypłat za określone osiągnięcie, wynagrodzenia chorobowego i dodatkowego wynagrodzenia rocznego.</p></details>
     <details class="bg-white rounded-2xl ring-1 ring-slate-200 p-5"><summary class="font-semibold flex justify-between gap-4">Ile mam czasu na dochodzenie zaległej odprawy lub ekwiwalentu? <span class="chev transition">▾</span></summary><p class="mt-3 text-sm text-slate-700">Roszczenia ze stosunku pracy przedawniają się z upływem 3 lat od dnia, w którym stały się wymagalne (art. 291 § 1 Kodeksu pracy). Od niewypłaconej w terminie kwoty należą się odsetki ustawowe za opóźnienie – od 5 marca 2026 r. 9,25% w skali roku.</p></details>
-    <details class="bg-white rounded-2xl ring-1 ring-slate-200 p-5"><summary class="font-semibold flex justify-between gap-4">Czy kalkulator wysyła gdzieś moje dane? <span class="chev transition">▾</span></summary><p class="mt-3 text-sm text-slate-700">Nie. Wszystkie obliczenia i generowanie PDF odbywają się lokalnie w Twojej przeglądarce. Wpisane dane mogą być zapamiętane wyłącznie w pamięci tej przeglądarki i możesz je w każdej chwili usunąć przyciskiem „Wyczyść dane”.</p></details>
+    <details class="bg-white rounded-2xl ring-1 ring-slate-200 p-5"><summary class="font-semibold flex justify-between gap-4">Czy kalkulator wysyła gdzieś moje dane? <span class="chev transition">▾</span></summary><p class="mt-3 text-sm text-slate-700">Nie. Wszystkie obliczenia i generowanie PDF odbywają się lokalnie w Twojej przeglądarce. Strona nie ładuje skryptów z zewnętrznych serwerów. Dane są zapamiętywane w pamięci tej przeglądarki tylko wtedy, gdy zaznaczysz taką opcję (numer konta nigdy), i możesz je w każdej chwili usunąć przyciskiem „Wyczyść dane”.</p></details>
   </div>
 </section>
 
@@ -546,7 +519,7 @@
   <div class="mx-auto max-w-7xl px-4 py-8 text-xs text-slate-500 space-y-3">
     <p><b class="text-slate-700">Podstawa prawna:</b> art. 23¹, 30, 36¹, 92¹, 154, 155¹, 171, 264, 282, 291 i 300 ustawy z 26 czerwca 1974 r. – Kodeks pracy (w brzmieniu od 27.01.2026 r.); art. 8 i 10 ustawy z 13 marca 2003 r. o szczególnych zasadach rozwiązywania z pracownikami stosunków pracy z przyczyn niedotyczących pracowników; rozporządzenie MPiPS z 8 stycznia 1997 r. w sprawie szczegółowych zasad udzielania urlopu wypoczynkowego, ustalania i wypłacania wynagrodzenia za czas urlopu oraz ekwiwalentu pieniężnego za urlop; rozporządzenie MPiPS z 18 grudnia 1998 r. w sprawie szczegółowych zasad ustalania podstawy wymiaru składek (§ 2 ust. 1 pkt 2 i 3); rozporządzenia Rady Ministrów w sprawie minimalnego wynagrodzenia za pracę w 2026 r. (4806 zł) i w 2027 r. (4950 zł, z 14 września 2026 r.); art. 481 Kodeksu cywilnego.</p>
     <p><b class="text-slate-700">Zastrzeżenie:</b> kalkulator ma charakter informacyjny i nie stanowi porady prawnej ani podatkowej. Wyniki zależą od wprowadzonych danych. Regulamin wynagradzania, układ zbiorowy lub umowa mogą przewidywać świadczenia korzystniejsze niż ustawowe. W sprawach spornych skonsultuj się z radcą prawnym, adwokatem lub Państwową Inspekcją Pracy.</p>
-    <p><b class="text-slate-700">Prywatność:</b> obliczenia i dokument PDF powstają wyłącznie w Twojej przeglądarce; nie wysyłamy wpisanych danych na żaden serwer.</p>
+    <p><b class="text-slate-700">Prywatność:</b> obliczenia i dokument PDF powstają wyłącznie w Twojej przeglądarce; nie wysyłamy wpisanych danych na żaden serwer, nie używamy plików cookie ani zewnętrznych skryptów. Dane zapisujemy w pamięci przeglądarki tylko na Twoje życzenie (bez numeru konta).</p>
     <p>© <span id="year">2026</span> <span data-site-name>SprawdźOdprawę.pl</span> · Stan prawny: 24.10.2026 r. <span id="contactLine"></span></p>
   </div>
 </footer>
@@ -571,1002 +544,8 @@
   </div>
 </div>
 
-<script>
-'use strict';
-
-/* ======================================================================
-   KONFIGURACJA WŁAŚCICIELA STRONY – uzupełnij przed publikacją
-   ====================================================================== */
-const CONFIG = {
-  siteName: 'SprawdźOdprawę.pl',          // nazwa w nagłówku, stopce i PDF
-  contactEmail: '',                         // e-mail kontaktowy (stopka + „zostań partnerem”)
-  pdfPrice: '14,99 zł',                     // cena wyświetlana w oknie płatności
-  buyCoffeeUrl: '',                         // np. 'https://buycoffee.to/twoja-nazwa' (BLIK, karta, przelew)
-  paymentLinkUrl: '',                       // opcjonalnie: link płatności BLIK/karta (Stripe Payment Link, Tpay, Przelewy24)
-  blikPhone: '',                            // opcjonalnie: numer telefonu do przelewu BLIK na telefon
-  paywallMode: 'honor',                     // 'honor' – potwierdzenie płatności; 'code' – kod odblokowujący; 'free' – bez płatności
-  unlockCodeHashes: [],                     // dla trybu 'code': skróty SHA-256 (hex) kodów, np. z narzędzia w README
-  pdfBranding: true,                        // dopisek z nazwą serwisu w stopce PDF
-  lawFirm: {                                // kancelaria partnerska (lead)
-    name: '',                               // np. 'Kancelaria Radcy Prawnego Jan Nowak'
-    url: '',                                // strona / formularz rezerwacji
-    email: '',                              // e-mail do zapytań
-    phone: ''                               // telefon
-  }
-};
-
-/* ======================================================================
-   STAŁE PRAWNE (stan na 24.10.2026)
-   ====================================================================== */
-const LAW = {
-  minWage: [
-    { from: '2024-01-01', value: 4242 },
-    { from: '2024-07-01', value: 4300 },
-    { from: '2025-01-01', value: 4666 },
-    { from: '2026-01-01', value: 4806 },
-    { from: '2027-01-01', value: 4950 }   // rozporządzenie RM z 14.09.2026
-  ],
-  minWageKnownUntil: '2027-12-31',
-  capMultiplier: 15,
-  zus: { emerytalna: 0.0976, rentowa: 0.015, chorobowa: 0.0245 },
-  health: 0.09,
-  pit2Monthly: 300,
-  youthLimit: 85528,
-  ekwReformFrom: '2026-01-27',             // art. 171 § 4–5 K.p.
-  wigiliaFrom: '2025-02-01',               // 24 grudnia dniem wolnym od pracy
-  interestDefault: 9.25                     // od 5.03.2026: 3,75% + 5,5 p.p.
-};
-
-const PDFMAKE_URL = 'https://cdn.jsdelivr.net/npm/pdfmake@0.2.23/build/pdfmake.min.js';
-const VFS_URL = 'https://cdn.jsdelivr.net/npm/pdfmake@0.2.23/build/vfs_fonts.js';
-const STORE_KEY = 'sprawdzodprawe.v1';
-const DAY = 86400000;
-
-/* ======================================================================
-   NARZĘDZIA: liczby, daty, formatowanie
-   ====================================================================== */
-const $ = (id) => document.getElementById(id);
-const r2 = (x) => Math.round(Number((x * 100).toPrecision(15))) / 100;
-const r0 = (x) => Math.round(Number(Number(x).toPrecision(15)));
-
-function parseNum(v) {
-  if (v == null) return 0;
-  const s = String(v).replace(/[\s ]/g, '').replace(/zł/gi, '').replace(',', '.');
-  const n = parseFloat(s);
-  return isFinite(n) ? n : 0;
-}
-function parseFrac(v) {
-  const s = String(v || '').trim().replace(/,/g, '.');
-  const m = s.match(/^(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)$/);
-  if (m) { const b = parseFloat(m[2]); return b ? parseFloat(m[1]) / b : 0; }
-  const n = parseFloat(s);
-  return isFinite(n) ? n : 0;
-}
-function groupInt(s) { return s.replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
-function fmtN(x, dec = 2) {
-  if (!isFinite(x)) x = 0;
-  const neg = x < 0;
-  const [i, f] = Math.abs(x).toFixed(dec).split('.');
-  return (neg ? '−' : '') + groupInt(i) + (dec ? ',' + f : '');
-}
-const fmtZl = (x) => fmtN(x) + ' zł';
-function fmtEtat(e) {
-  const known = { 1: 'pełny etat', 0.75: '3/4 etatu', 0.5: '1/2 etatu', 0.25: '1/4 etatu' };
-  return known[e] || (fmtN(e, 4).replace(/0+$/, '').replace(/,$/, '') + ' etatu');
-}
-
-function parseDate(s) {
-  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || '');
-  return m ? Date.UTC(+m[1], +m[2] - 1, +m[3]) : null;
-}
-const pad = (n) => String(n).padStart(2, '0');
-function isoDate(t) { const d = new Date(t); return d.getUTCFullYear() + '-' + pad(d.getUTCMonth() + 1) + '-' + pad(d.getUTCDate()); }
-function fmtDate(t) { const d = new Date(t); return pad(d.getUTCDate()) + '.' + pad(d.getUTCMonth() + 1) + '.' + d.getUTCFullYear(); }
-function todayUTC() { const n = new Date(); return Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()); }
-function dim(y, m) { return new Date(Date.UTC(y, m + 1, 0)).getUTCDate(); }
-function addYMD(t, y, mo, d) {
-  const x = new Date(t);
-  let Y = x.getUTCFullYear() + y, M = x.getUTCMonth() + mo;
-  Y += Math.floor(M / 12); M = ((M % 12) + 12) % 12;
-  return Date.UTC(Y, M, Math.min(x.getUTCDate(), dim(Y, M))) + d * DAY;
-}
-// Różnica w latach/miesiącach/dniach między a (włącznie) i bExcl (wyłącznie)
-function diffYMD(a, bExcl) {
-  const A = new Date(a), B = new Date(bExcl);
-  let y = B.getUTCFullYear() - A.getUTCFullYear();
-  let m = B.getUTCMonth() - A.getUTCMonth();
-  let d = B.getUTCDate() - A.getUTCDate();
-  if (d < 0) { m--; d += new Date(Date.UTC(B.getUTCFullYear(), B.getUTCMonth(), 0)).getUTCDate(); }
-  if (m < 0) { y--; m += 12; }
-  return { y, m, d };
-}
-function plural(n, one, few, many) {
-  if (n === 1) return one;
-  const n10 = n % 10, n100 = n % 100;
-  return (n10 >= 2 && n10 <= 4 && (n100 < 12 || n100 > 14)) ? few : many;
-}
-function fmtYMDShort(o) { return `${o.y} ${plural(o.y, 'rok', 'lata', 'lat')} ${o.m} mies. ${o.d} ${plural(o.d, 'dzień', 'dni', 'dni')}`; }
-function fmtYMD(o) {
-  return `${o.y} ${plural(o.y, 'rok', 'lata', 'lat')}, ${o.m} ${plural(o.m, 'miesiąc', 'miesiące', 'miesięcy')} i ${o.d} ${plural(o.d, 'dzień', 'dni', 'dni')}`;
-}
-const MONTHS = ['styczeń', 'luty', 'marzec', 'kwiecień', 'maj', 'czerwiec', 'lipiec', 'sierpień', 'wrzesień', 'październik', 'listopad', 'grudzień'];
-const MONTHS_SHORT = ['sty', 'lut', 'mar', 'kwi', 'maj', 'cze', 'lip', 'sie', 'wrz', 'paź', 'lis', 'gru'];
-function monthOffset(y, m, k) { const d = new Date(Date.UTC(y, m + k, 1)); return { y: d.getUTCFullYear(), m: d.getUTCMonth() }; }
-function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
-
-/* Kwota słownie (PLN) */
-function wordsPL(n) {
-  const U = ['', 'jeden', 'dwa', 'trzy', 'cztery', 'pięć', 'sześć', 'siedem', 'osiem', 'dziewięć'];
-  const T = ['dziesięć', 'jedenaście', 'dwanaście', 'trzynaście', 'czternaście', 'piętnaście', 'szesnaście', 'siedemnaście', 'osiemnaście', 'dziewiętnaście'];
-  const D = ['', '', 'dwadzieścia', 'trzydzieści', 'czterdzieści', 'pięćdziesiąt', 'sześćdziesiąt', 'siedemdziesiąt', 'osiemdziesiąt', 'dziewięćdziesiąt'];
-  const H = ['', 'sto', 'dwieście', 'trzysta', 'czterysta', 'pięćset', 'sześćset', 'siedemset', 'osiemset', 'dziewięćset'];
-  const G = [null, ['tysiąc', 'tysiące', 'tysięcy'], ['milion', 'miliony', 'milionów']];
-  const tri = (x) => {
-    const h = Math.floor(x / 100), t = Math.floor((x % 100) / 10), u = x % 10, out = [];
-    if (h) out.push(H[h]);
-    if (t === 1) out.push(T[u]); else { if (t) out.push(D[t]); if (u) out.push(U[u]); }
-    return out.join(' ');
-  };
-  if (n === 0) return 'zero';
-  const parts = [];
-  let g = 0;
-  while (n > 0) {
-    const x = n % 1000;
-    if (x) {
-      if (g === 0) parts.unshift(tri(x));
-      else if (x === 1) parts.unshift(G[g][0]);
-      else parts.unshift(tri(x) + ' ' + plural(x, G[g][0], G[g][1], G[g][2]));
-    }
-    n = Math.floor(n / 1000); g++;
-  }
-  return parts.join(' ');
-}
-function amountInWords(x) {
-  const zl = Math.floor(r2(x));
-  const gr = Math.round(r2(x - zl) * 100);
-  return `${wordsPL(zl)} ${plural(zl, 'złoty', 'złote', 'złotych')} ${pad(gr)}/100`;
-}
-
-/* IBAN */
-function normIban(s) {
-  let v = String(s || '').replace(/[\s-]/g, '').toUpperCase();
-  if (/^\d{26}$/.test(v)) v = 'PL' + v;
-  return v;
-}
-function ibanValid(v) {
-  if (!/^[A-Z]{2}\d{2}[A-Z0-9]{10,30}$/.test(v)) return false;
-  if (v.startsWith('PL') && v.length !== 28) return false;
-  const r = v.slice(4) + v.slice(0, 4);
-  let mod = 0;
-  for (const ch of r) {
-    const code = ch >= 'A' ? String(ch.charCodeAt(0) - 55) : ch;
-    for (const c of code) mod = (mod * 10 + Number(c)) % 97;
-  }
-  return mod === 1;
-}
-const fmtIban = (v) => v.replace(/(.{4})/g, '$1 ').trim();
-
-/* ======================================================================
-   PRAWO: święta, współczynnik, płaca minimalna
-   ====================================================================== */
-function easterSunday(y) {
-  const a = y % 19, b = Math.floor(y / 100), c = y % 100, d = Math.floor(b / 4), e = b % 4;
-  const f = Math.floor((b + 8) / 25), g = Math.floor((b - f + 1) / 3);
-  const h = (19 * a + b - d - g + 15) % 30, i = Math.floor(c / 4), k = c % 4;
-  const l = (32 + 2 * e + 2 * i - h - k) % 7, m = Math.floor((a + 11 * h + 22 * l) / 451);
-  const month = Math.floor((h + l - 7 * m + 114) / 31), day = ((h + l - 7 * m + 114) % 31) + 1;
-  return Date.UTC(y, month - 1, day);
-}
-function holidays(y, withWigilia) {
-  const E = easterSunday(y);
-  const list = [[0, 1], [0, 6], [4, 1], [4, 3], [7, 15], [10, 1], [10, 11], [11, 25], [11, 26]].map(([m, d]) => Date.UTC(y, m, d));
-  list.push(E, E + DAY, E + 49 * DAY, E + 60 * DAY); // Wielkanoc, Poniedziałek Wielkanocny, Zielone Świątki, Boże Ciało
-  if (withWigilia) list.push(Date.UTC(y, 11, 24));
-  return new Set(list);
-}
-// Liczba dni pracy w roku = dni pon.–pt. bez świąt, minus święta przypadające w sobotę
-function workingDays(y, withWigilia) {
-  const hs = holidays(y, withWigilia);
-  let work = 0, satHol = 0;
-  for (let t = Date.UTC(y, 0, 1); t <= Date.UTC(y, 11, 31); t += DAY) {
-    const dow = new Date(t).getUTCDay();
-    if (dow >= 1 && dow <= 5 && !hs.has(t)) work++;
-    if (dow === 6 && hs.has(t)) satHol++;
-  }
-  return work - satHol;
-}
-function coefficientFor(end) {
-  const y = new Date(end).getUTCFullYear();
-  const withW = end >= parseDate(LAW.wigiliaFrom);
-  const wd = workingDays(y, withW);
-  return { year: y, workingDays: wd, coef: r2(wd / 12), wigilia: withW };
-}
-function minWageOn(t) {
-  let found = null;
-  for (const row of LAW.minWage) if (t >= parseDate(row.from)) found = row;
-  return {
-    value: (found || LAW.minWage[0]).value,
-    from: (found || LAW.minWage[0]).from,
-    known: !!found && t <= parseDate(LAW.minWageKnownUntil)
-  };
-}
-function ekwDue(end, payDay, payMode) {
-  if (end < parseDate(LAW.ekwReformFrom)) return { date: end, rule: 'old' };
-  const d = new Date(end);
-  let y = d.getUTCFullYear(), m = d.getUTCMonth();
-  if (payMode === 'next') { m++; if (m > 11) { m = 0; y++; } }
-  const payday = Date.UTC(y, m, Math.min(payDay, dim(y, m)));
-  if (payday < end) return { date: end + 10 * DAY, rule: '10days', payday };
-  return { date: payday, rule: 'payday', payday };
-}
-
-/* ======================================================================
-   ODCZYT FORMULARZA
-   ====================================================================== */
-const val = (id) => ($(id) ? $(id).value : '');
-const num = (id) => parseNum(val(id));
-const chk = (id) => !!($(id) && $(id).checked);
-const optNum = (id) => (String(val(id)).trim() === '' ? null : parseNum(val(id)));
-const radio = (name) => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : ''; };
-
-function readState() {
-  const under26 = chk('under26');
-  const etatSel = val('etat');
-  const payDayRaw = Math.floor(num('payDay'));
-  return {
-    start: parseDate(val('startDate')),
-    end: parseDate(val('endDate')),
-    notice: parseDate(val('noticeDate')),
-    extraY: Math.max(0, Math.floor(num('extraY'))),
-    extraM: Math.max(0, Math.floor(num('extraM'))),
-    extraD: Math.max(0, Math.floor(num('extraD'))),
-    etat: etatSel === 'custom' ? parseFrac(val('etatCustom')) : parseFloat(etatSel),
-    norma: parseFloat(val('norma')) || 8,
-    employer20: chk('employer20'),
-    reason: val('reason'),
-    retire: chk('retire'),
-    under26,
-    fixed: num('fixedSalary'),
-    fixedOther: num('fixedOther'),
-    v: [num('var1'), num('var2'), num('var3')],
-    topUp: chk('topUp'),
-    dw: [num('dw1'), num('dw2'), num('dw3')],
-    dn: [num('dn1'), num('dn2'), num('dn3')],
-    long12: num('long12'),
-    leaveMode: radio('leaveMode') || 'days',
-    leaveDays: num('leaveDays'),
-    leaveHours: num('leaveHours'),
-    payDay: payDayRaw >= 1 && payDayRaw <= 31 ? payDayRaw : 10,
-    payMode: val('payMode'),
-    pitRate: under26 ? 0 : parseFloat(val('pitRate')),
-    pit2: chk('pit2'),
-    kup: parseFloat(val('kup')) || 0,
-    paidEkw: optNum('paidEkw'),
-    paidOdp: optNum('paidOdp'),
-    paidEmer: optNum('paidEmer'),
-    empBase: optNum('empBase'),
-    dueEkwOv: parseDate(val('dueEkw')),
-    dueOdpOv: parseDate(val('dueOdp')),
-    calcDate: parseDate(val('calcDate')) || todayUTC(),
-    rate: String(val('rate')).trim() === '' ? LAW.interestDefault : num('rate')
-  };
-}
-
-/* ======================================================================
-   OBLICZENIA
-   ====================================================================== */
-function compute(S) {
-  const R = { ok: false, errors: [], alerts: [] };
-  if (!S.start || !S.end) { R.errors.push('Podaj datę rozpoczęcia pracy i datę rozwiązania umowy.'); return R; }
-  if (S.end < S.start) { R.errors.push('Data rozwiązania umowy nie może być wcześniejsza niż data rozpoczęcia pracy.'); return R; }
-  if (!(S.etat > 0 && S.etat <= 1)) { R.errors.push('Wymiar etatu musi być większy od 0 i nie większy niż 1 (np. 3/5 lub 0,6).'); return R; }
-
-  const endD = new Date(S.end), ey = endD.getUTCFullYear(), em = endD.getUTCMonth();
-
-  // --- Podstawa wymiaru ---
-  const months3 = [-3, -2, -1].map((k) => monthOffset(ey, em, k));
-  const m12a = monthOffset(ey, em, -12), m12b = monthOffset(ey, em, -1);
-  const fixedTotal = r2(S.fixed + S.fixedOther);
-  const varSum = r2(S.v[0] + S.v[1] + S.v[2]);
-  const dwSum = S.dw.reduce((a, b) => a + b, 0), dnSum = S.dn.reduce((a, b) => a + b, 0);
-  let varBase = varSum, topUpUsed = false;
-  if (S.topUp && varSum > 0 && dwSum > 0 && dnSum > dwSum) { varBase = r2(varSum / dwSum * dnSum); topUpUsed = true; }
-  const varAvg = r2(varBase / 3);
-  const longAvg = r2(S.long12 / 12);
-  const B = r2(fixedTotal + varAvg + longAvg);
-  R.base = { months3, m12a, m12b, fixedTotal, varSum, varBase, varAvg, longAvg, B, topUpUsed, dwSum, dnSum };
-
-  // --- Moduł A: ekwiwalent ---
-  const C = coefficientFor(S.end);
-  const coefEtat = r2(C.coef * S.etat);
-  const hours = S.leaveMode === 'hours' ? r2(S.leaveHours) : r2(S.leaveDays * S.norma);
-  const daily = coefEtat > 0 ? r2(B / coefEtat) : 0;
-  const hourly = r2(daily / S.norma);
-  const ekwGross = r2(hourly * hours);
-  const due = ekwDue(S.end, S.payDay, S.payMode);
-  R.ekw = { C, coefEtat, hours, daily, hourly, gross: ekwGross, due };
-
-  // --- Moduł B: staż i odprawa ---
-  const effStart = addYMD(S.start, -S.extraY, -S.extraM, -S.extraD);
-  const endExcl = S.end + DAY;
-  const tenure = diffYMD(effStart, endExcl);
-  const t2 = addYMD(effStart, 2, 0, 0), t8 = addYMD(effStart, 8, 0, 0);
-  const mult = endExcl < t2 ? 1 : (endExcl <= t8 ? 2 : 3);
-  const daysTo2 = Math.round((t2 - endExcl) / DAY);            // > 0: brakuje dni do pełnych 2 lat
-  const daysToOver8 = Math.round((t8 + DAY - endExcl) / DAY);  // > 0: brakuje dni do „ponad 8 lat”
-  const daysOver8 = Math.round((endExcl - t8) / DAY);          // > 0: o tyle dni przekroczono 8 lat
-  const eligible = S.employer20 && (S.reason === 'wypowiedzenie' || S.reason === 'porozumienie');
-  const mw = minWageOn(S.end);
-  const cap = r2(LAW.capMultiplier * mw.value);
-  const raw = r2(mult * B);
-  const odpGross = eligible ? Math.min(raw, cap) : 0;
-  R.odp = { effStart, tenure, mult, daysTo2, daysToOver8, daysOver8, eligible, mw, cap, raw, gross: odpGross, capped: eligible && raw > cap };
-  R.emer = { gross: S.retire ? B : 0 };
-
-  // --- Podatki i składki ---
-  const zE = r2(ekwGross * LAW.zus.emerytalna), zR = r2(ekwGross * LAW.zus.rentowa), zC = r2(ekwGross * LAW.zus.chorobowa);
-  const zus = r2(zE + zR + zC);
-  const health = r2((ekwGross - zus) * LAW.health);
-  const rate = S.pitRate / 100;
-  const ekwTaxBase = r2(ekwGross - zus);
-  const taxEkw = r0(r0(ekwTaxBase) * rate);
-  const taxOdp = r0(r0(odpGross) * rate);
-  const taxEmer = r0(r0(R.emer.gross) * rate);
-  const sumBase = ekwTaxBase + odpGross + R.emer.gross;
-  const pit2 = S.pit2 && S.pitRate === 12 ? LAW.pit2Monthly : 0;
-  const totalTax = sumBase > 0 ? Math.max(0, r0(r0(Math.max(0, sumBase - S.kup)) * rate - pit2)) : 0;
-  const taxCorr = totalTax - (taxEkw + taxOdp + taxEmer);
-  R.tax = {
-    zE, zR, zC, zus, health, rate: S.pitRate, taxEkw, taxOdp, taxEmer, totalTax, taxCorr, pit2, kup: S.kup,
-    ekwNet: r2(ekwGross - zus - health - taxEkw),
-    odpNet: r2(odpGross - taxOdp),
-    emerNet: r2(R.emer.gross - taxEmer),
-    grossTotal: r2(ekwGross + odpGross + R.emer.gross),
-    netTotal: r2(ekwGross + odpGross + R.emer.gross - zus - health - totalTax)
-  };
-
-  // --- Audyt i odsetki ---
-  const rows = [];
-  const addRow = (key, label, title, correct, paid, dueDate, dueNote) => {
-    const paidV = paid == null ? 0 : paid;
-    const shortfall = Math.max(0, r2(correct - paidV));
-    const days = Math.max(0, Math.round((S.calcDate - dueDate) / DAY));
-    const interest = r2(shortfall * S.rate / 100 * days / 365);
-    const pending = paid == null && S.calcDate <= dueDate;   // nic nie wypłacono, ale termin jeszcze nie minął
-    rows.push({ key, label, title, correct, paid, paidV, shortfall, overpaid: r2(paidV - correct) > 0 ? r2(paidV - correct) : 0, due: dueDate, dueNote, days, interest, pending });
-  };
-  if (ekwGross > 0 || S.paidEkw != null) {
-    addRow('ekw', 'Ekwiwalent za urlop', 'ekwiwalentu pieniężnego za niewykorzystany urlop wypoczynkowy', ekwGross, S.paidEkw, S.dueEkwOv || due.date, S.dueEkwOv ? 'data wskazana' : due.rule);
-  }
-  if (eligible) addRow('odp', 'Odprawa pieniężna', 'odprawy pieniężnej z tytułu rozwiązania stosunku pracy z przyczyn niedotyczących pracownika', odpGross, S.paidOdp, S.dueOdpOv || S.end, S.dueOdpOv ? 'data wskazana' : 'end');
-  if (S.retire) addRow('emer', 'Odprawa emerytalno-rentowa', 'odprawy emerytalno-rentowej', R.emer.gross, S.paidEmer, S.end, 'end');
-  const totalShort = r2(rows.reduce((a, r) => a + r.shortfall, 0));
-  const totalInterest = r2(rows.reduce((a, r) => a + r.interest, 0));
-  const allPending = rows.length > 0 && rows.every((r) => r.pending || r.shortfall === 0);
-  R.audit = { rows, totalShort, totalInterest, rate: S.rate, calcDate: S.calcDate, allPending };
-
-  // Symulacja błędu pracodawcy (tylko składniki stałe)
-  const eB = fixedTotal;
-  const eDaily = coefEtat > 0 ? r2(eB / coefEtat) : 0;
-  R.sim = {
-    B: eB,
-    ekw: r2(r2(eDaily / S.norma) * hours),
-    odp: eligible ? Math.min(r2(mult * eB), cap) : 0,
-    emer: S.retire ? eB : 0
-  };
-
-  // --- Ostrzeżenia i podpowiedzi ---
-  const A = R.alerts;
-  if (eligible && mult === 2 && daysToOver8 > 0 && daysToOver8 <= 120) {
-    A.push({ tone: 'amber', title: `Do przekroczenia 8 lat stażu brakuje ${daysToOver8} ${plural(daysToOver8, 'dnia', 'dni', 'dni')}`, text: `Przy stażu ponad 8 lat (już 8 lat i 1 dzień) odprawa rośnie z 2× do 3× podstawy – w Twoim przypadku o ${fmtZl(Math.min(r2(3 * B), cap) - odpGross)}. Sprawdź, czy do stażu nie należy doliczyć wcześniejszych okresów zatrudnienia u tego pracodawcy lub okresu objętego odszkodowaniem za skrócone wypowiedzenie.` });
-  }
-  if (eligible && mult === 3 && daysOver8 > 0 && daysOver8 <= 120) {
-    A.push({ tone: 'emerald', title: `Przekraczasz próg 8 lat o ${daysOver8} ${plural(daysOver8, 'dzień', 'dni', 'dni')} – należy się odprawa trzymiesięczna`, text: 'Staż liczy się do ostatniego dnia okresu wypowiedzenia. Jeśli pracodawca policzył 2× podstawę, bo liczył staż do dnia wręczenia wypowiedzenia – to błąd.' });
-  }
-  if (eligible && mult === 1 && daysTo2 > 0 && daysTo2 <= 90) {
-    A.push({ tone: 'amber', title: `Do 2 lat stażu brakuje ${daysTo2} ${plural(daysTo2, 'dnia', 'dni', 'dni')}`, text: `Przy stażu co najmniej 2 lat odprawa wynosi 2× podstawę (różnica: ${fmtZl(Math.min(r2(2 * B), cap) - odpGross)}).` });
-  }
-  if (eligible && S.notice && new Date(S.notice).getUTCFullYear() === 2026 && ey === 2027) {
-    const gain = r2(Math.min(raw, cap) - Math.min(raw, r2(LAW.capMultiplier * minWageOn(Date.UTC(2026, 11, 31)).value)));
-    A.push({ tone: 'emerald', title: 'Wypowiedzenie w 2026 r., rozwiązanie umowy w 2027 r. – obowiązuje wyższy limit 74 250 zł', text: `Limit odprawy ustala się według płacy minimalnej z dnia rozwiązania stosunku pracy (art. 8 ust. 4 ustawy), a nie z dnia wręczenia wypowiedzenia. ${gain > 0 ? `W Twoim przypadku to o ${fmtZl(gain)} więcej niż przy limicie 2026 r. (72 090 zł).` : 'W Twoim przypadku odprawa mieści się poniżej obu limitów.'}` });
-  }
-  if (eligible && ey === 2026 && raw > cap) {
-    A.push({ tone: 'sky', title: 'Odprawa ograniczona limitem 2026 r. (72 090 zł)', text: `Bez limitu wynosiłaby ${fmtZl(raw)}. Dla umów rozwiązanych w 2027 r. limit wynosi 74 250 zł (15 × 4950 zł).` });
-  }
-  if (!mw.known) A.push({ tone: 'amber', title: 'Brak potwierdzonej płacy minimalnej dla tej daty', text: `Przyjęto ${fmtZl(mw.value)} (ostatnia znana wartość). Zweryfikuj limit odprawy w aktualnym rozporządzeniu.` });
-  if (!S.employer20 && (S.reason === 'wypowiedzenie' || S.reason === 'porozumienie')) A.push({ tone: 'slate', title: 'Ustawowa odprawa nie przysługuje – pracodawca zatrudnia mniej niż 20 osób', text: 'Sprawdź jednak regulamin wynagradzania, układ zbiorowy lub umowę – mogą przewidywać odprawę.' });
-  if (S.reason === 'inne') A.push({ tone: 'slate', title: 'Ustawowa odprawa z art. 8 nie przysługuje przy tej przyczynie rozwiązania umowy', text: 'Odprawa przysługuje, gdy umowę rozwiązano wyłącznie z przyczyn niedotyczących pracownika – wypowiedzeniem pracodawcy lub porozumieniem stron. Ekwiwalent za urlop należy się niezależnie od przyczyny.' });
-  if (due.rule === 'old') A.push({ tone: 'slate', title: 'Rozwiązanie umowy przed 27.01.2026 r.', text: 'Dla umów rozwiązanych przed nowelizacją ekwiwalent był co do zasady wymagalny w dniu rozwiązania stosunku pracy.' });
-  if (S.under26) A.push({ tone: 'slate', title: 'Ulga dla młodych: 0% PIT', text: `Zwolnienie obejmuje przychody ze stosunku pracy do ${fmtZl(LAW.youthLimit)} w roku podatkowym. Nadwyżka jest opodatkowana według skali.` });
-  if (S.etat === 1 && B > 0 && B < mw.value) A.push({ tone: 'amber', title: 'Podstawa niższa niż płaca minimalna', text: 'Sprawdź wpisane kwoty – przy pełnym etacie wynagrodzenie zasadnicze z reguły nie jest niższe niż płaca minimalna.' });
-
-  R.ok = true;
-  return R;
-}
-
-/* ======================================================================
-   RENDEROWANIE
-   ====================================================================== */
-function mLabel(o) { return `${MONTHS[o.m]} ${o.y}`; }
-function rowsTable(head, rows, totalIdx) {
-  return `<table class="calc"><thead><tr>${head.map((h) => `<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map((r, i) =>
-    `<tr class="${i === totalIdx ? 'total' : ''}">${r.map((c, j) => `<td class="${j === r.length - 1 ? 'v' : (j === 1 && r.length === 3 ? 'f' : '')}">${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
-}
-
-// Wiersze dowodu matematycznego (wspólne dla strony i PDF): [opis, wzór, wynik]
-function proofRows(S, R) {
-  const b = R.base, e = R.ekw, o = R.odp;
-  const base = [
-    ['Składniki stałe (miesiąc rozwiązania umowy)', `${fmtN(S.fixed)} + ${fmtN(S.fixedOther)}`, fmtZl(b.fixedTotal)],
-    [`Składniki zmienne – średnia z 3 mies. (${b.months3.map((x) => MONTHS_SHORT[x.m] + ' ' + x.y).join(', ')})`,
-      b.topUpUsed ? `(${fmtN(b.varSum)} ÷ ${fmtN(b.dwSum, 0)} dni × ${fmtN(b.dnSum, 0)} dni) ÷ 3` : `(${S.v.map((x) => fmtN(x)).join(' + ')}) ÷ 3`, fmtZl(b.varAvg)],
-    [`Składniki za okresy > 1 mies. – średnia z 12 mies. (${MONTHS_SHORT[b.m12a.m]} ${b.m12a.y} – ${MONTHS_SHORT[b.m12b.m]} ${b.m12b.y})`, `${fmtN(S.long12)} ÷ 12`, fmtZl(b.longAvg)],
-    ['Podstawa wymiaru (miesięczna)', 'suma składników', fmtZl(b.B)]
-  ];
-  const dueTxt = e.due.rule === 'payday' ? `termin wypłaty wynagrodzenia (art. 171 § 4 K.p.)`
-    : e.due.rule === '10days' ? `10 dni od rozwiązania – pensja płatna ${fmtDate(e.due.payday)} (art. 171 § 5 K.p.)`
-      : 'dzień rozwiązania stosunku pracy (przed 27.01.2026)';
-  const ekw = [
-    [`Współczynnik ekwiwalentowy (rok ${e.C.year}, ${fmtEtat(S.etat)})`, `${e.C.workingDays} dni pracy ÷ 12 = ${fmtN(e.C.coef)}${S.etat !== 1 ? ` × ${fmtN(S.etat, 4).replace(/0+$/, '').replace(/,$/, '')}` : ''}`, fmtN(e.coefEtat)],
-    ['Stawka dzienna', `zaokr.(${fmtN(b.B)} ÷ ${fmtN(e.coefEtat)}; 2)`, fmtZl(e.daily)],
-    ['Stawka godzinowa', `zaokr.(${fmtN(e.daily)} ÷ ${S.norma} h; 2)`, fmtZl(e.hourly)],
-    ['Godziny niewykorzystanego urlopu', S.leaveMode === 'hours' ? 'podane w godzinach' : `${fmtN(S.leaveDays, S.leaveDays % 1 ? 2 : 0)} dni × ${S.norma} h`, `${fmtN(e.hours, e.hours % 1 ? 2 : 0)} h`],
-    ['Ekwiwalent brutto', `${fmtN(e.hourly)} × ${fmtN(e.hours, e.hours % 1 ? 2 : 0)} h`, fmtZl(e.gross)],
-    ['Termin wypłaty', dueTxt, fmtDate(e.due.date)]
-  ];
-  const multTxt = { 1: 'staż krótszy niż 2 lata: 1×', 2: 'staż od 2 do 8 lat: 2×', 3: 'staż ponad 8 lat: 3×' }[o.mult];
-  const extra = S.extraY || S.extraM || S.extraD ? ` (w tym dodatkowo ${S.extraY} l. ${S.extraM} mies. ${S.extraD} dni)` : '';
-  const odp = [
-    ['Staż u pracodawcy (wraz z okresem wypowiedzenia)', `${fmtDate(S.start)} – ${fmtDate(S.end)}${extra}`, fmtYMDShort(o.tenure)],
-    ['Mnożnik odprawy', multTxt, `${o.mult}×`],
-    ['Odprawa przed limitem', `${o.mult} × ${fmtN(b.B)}`, fmtZl(o.raw)],
-    [`Limit: 15 × płaca minimalna z dnia rozwiązania (${fmtDate(S.end)})`, `15 × ${fmtN(o.mw.value)}`, fmtZl(o.cap)],
-    ['Odprawa należna (brutto)', `min(${fmtN(o.raw)}; ${fmtN(o.cap)})`, fmtZl(o.gross)]
-  ];
-  const emer = [
-    ['Odprawa emerytalno-rentowa (art. 92¹ K.p.)', `1 × ${fmtN(b.B)}`, fmtZl(R.emer.gross)]
-  ];
-  return { base, ekw, odp, emer };
-}
-
-function renderAlerts(R) {
-  const tones = {
-    amber: 'bg-amber-50 ring-amber-200 text-amber-900',
-    emerald: 'bg-emerald-50 ring-emerald-200 text-emerald-900',
-    sky: 'bg-sky-50 ring-sky-200 text-sky-900',
-    slate: 'bg-slate-100 ring-slate-200 text-slate-800',
-    rose: 'bg-rose-50 ring-rose-200 text-rose-900'
-  };
-  const list = R.ok ? R.alerts : R.errors.map((t) => ({ tone: 'rose', title: t, text: '' }));
-  $('alerts').innerHTML = list.map((a) => `<div class="rounded-xl ring-1 p-4 ${tones[a.tone]}"><p class="font-semibold text-sm">${esc(a.title)}</p>${a.text ? `<p class="text-sm mt-1 opacity-90">${esc(a.text)}</p>` : ''}</div>`).join('');
-}
-
-function render(S, R) {
-  renderAlerts(R);
-  // etykiety miesięcy
-  if (S.end) {
-    const d = new Date(S.end);
-    const ms = [-3, -2, -1].map((k) => monthOffset(d.getUTCFullYear(), d.getUTCMonth(), k));
-    ms.forEach((o, i) => { $('lblVar' + (i + 1)).textContent = `${mLabel(o)} – zmienne`; $('lblTop' + (i + 1)).textContent = mLabel(o); });
-  }
-  $('topUpBox').hidden = !S.topUp;
-  $('etatCustom').hidden = val('etat') !== 'custom';
-  $('leaveDaysBox').hidden = S.leaveMode !== 'days';
-  $('leaveHoursBox').hidden = S.leaveMode !== 'hours';
-  $('leaveDaysHint').textContent = `1 dzień urlopu = ${S.norma} godzin.`;
-  $('paidEmerBox').hidden = !S.retire;
-  $('pitRate').disabled = S.under26;
-  $('pitHint').textContent = S.under26 ? 'Ulga dla młodych – zastosowano 0% PIT.' : '';
-
-  const empty = '<p class="text-sm text-slate-500">Uzupełnij dane powyżej.</p>';
-  if (!R.ok) {
-    ['ekwTable', 'ekwNetTable', 'odpTable', 'emerTable', 'totalNetTable', 'auditTable'].forEach((id) => { $(id).innerHTML = empty; });
-    $('baseMini').innerHTML = '';
-    $('summary').innerHTML = empty;
-    $('letterPreview').innerHTML = empty;
-    $('coefBadge').textContent = '';
-    renderLeaveHelper(S, null);
-    return;
-  }
-  const P = proofRows(S, R);
-  const T = R.tax;
-
-  $('baseMini').innerHTML = `<p class="text-xs font-semibold text-emerald-800 uppercase tracking-wide">Podstawa wymiaru</p><p class="text-2xl font-extrabold text-emerald-900 num">${fmtZl(R.base.B)}</p><p class="text-xs text-emerald-800 mt-1 num">${fmtN(R.base.fixedTotal)} stałe + ${fmtN(R.base.varAvg)} zmienne + ${fmtN(R.base.longAvg)} kwartalne/roczne</p>`;
-  $('coefBadge').textContent = `Współczynnik ${R.ekw.C.year}: ${fmtN(R.ekw.C.coef)} (${R.ekw.C.workingDays} dni pracy)`;
-
-  $('ekwTable').innerHTML = `<p class="text-sm font-semibold mb-2">Podstawa wymiaru</p>` + rowsTable(['Pozycja', 'Wyliczenie', 'Wynik'], P.base, 3) +
-    `<p class="text-sm font-semibold mt-5 mb-2">Ekwiwalent – krok po kroku</p>` + rowsTable(['Krok', 'Wyliczenie', 'Wynik'], P.ekw, 4);
-  $('ekwNetTable').innerHTML = `<p class="text-sm font-semibold mb-2">Ekwiwalent netto</p>` + rowsTable(['Pozycja', 'Wyliczenie', 'Kwota'], [
-    ['Ekwiwalent brutto', '', fmtZl(R.ekw.gross)],
-    ['Składki ZUS pracownika (13,71%)', `${fmtN(T.zE)} + ${fmtN(T.zR)} + ${fmtN(T.zC)}`, '−' + fmtZl(T.zus)],
-    ['Składka zdrowotna (9%)', `9% × (${fmtN(R.ekw.gross)} − ${fmtN(T.zus)})`, '−' + fmtZl(T.health)],
-    [`Zaliczka PIT (${T.rate}%)`, `${T.rate}% × ${fmtN(r0(R.ekw.gross - T.zus), 0)} zł`, '−' + fmtZl(T.taxEkw)],
-    ['Ekwiwalent netto', '', fmtZl(T.ekwNet)]
-  ], 4);
-
-  const o = R.odp;
-  if (o.eligible) {
-    $('odpTable').innerHTML = `<p class="text-sm font-semibold mb-2">Odprawa z art. 8 ustawy – krok po kroku</p>` + rowsTable(['Krok', 'Wyliczenie', 'Wynik'], P.odp, 4) +
-      `<p class="text-sm font-semibold mt-5 mb-2">Odprawa netto</p>` + rowsTable(['Pozycja', 'Wyliczenie', 'Kwota'], [
-        ['Odprawa brutto', '', fmtZl(o.gross)],
-        ['Składki ZUS i zdrowotna', 'zwolniona (§ 2 ust. 1 pkt 3 rozp. składkowego)', fmtZl(0)],
-        [`Zaliczka PIT (${T.rate}%)`, `${T.rate}% × ${fmtN(r0(o.gross), 0)} zł`, '−' + fmtZl(T.taxOdp)],
-        ['Odprawa netto', '', fmtZl(T.odpNet)]
-      ], 3);
-  } else {
-    $('odpTable').innerHTML = `<div class="rounded-xl bg-slate-50 ring-1 ring-slate-200 p-4 text-sm text-slate-700">Ustawowa odprawa z art. 8 nie przysługuje przy wybranych warunkach (wymagane: pracodawca zatrudniający co najmniej 20 osób i rozwiązanie umowy wyłącznie z przyczyn niedotyczących pracownika). Staż u pracodawcy: <b>${fmtYMD(o.tenure)}</b>.</div>`;
-  }
-  $('emerTable').innerHTML = S.retire ? `<p class="text-sm font-semibold mb-2">Odprawa emerytalno-rentowa</p>` + rowsTable(['Pozycja', 'Wyliczenie', 'Wynik'], [
-    ...P.emer,
-    ['Składki ZUS i zdrowotna', 'zwolniona (§ 2 ust. 1 pkt 2 rozp. składkowego)', fmtZl(0)],
-    [`Zaliczka PIT (${T.rate}%)`, `${T.rate}% × ${fmtN(r0(R.emer.gross), 0)} zł`, '−' + fmtZl(T.taxEmer)],
-    ['Odprawa emerytalno-rentowa netto', '', fmtZl(T.emerNet)]
-  ], 3) + `<p class="hint">Układ zbiorowy, regulamin lub przepisy szczególne mogą przewidywać wyższą odprawę. Kwestia jednoczesnego nabycia odprawy emerytalnej i odprawy z art. 8 wymaga indywidualnej analizy.</p>` : '';
-
-  const totalRows = [
-    ['Razem brutto', '', fmtZl(T.grossTotal)],
-    ['Składki ZUS i zdrowotna (tylko od ekwiwalentu)', '', '−' + fmtZl(r2(T.zus + T.health))],
-    ['PIT od poszczególnych świadczeń', '', '−' + fmtZl(T.taxEkw + T.taxOdp + T.taxEmer)]
-  ];
-  if (T.taxCorr !== 0) totalRows.push([`Korekta PIT (${T.kup ? 'KUP ' + T.kup + ' zł' : ''}${T.kup && T.pit2 ? ', ' : ''}${T.pit2 ? 'PIT-2 300 zł' : ''}, zaokrąglenia)`, '', (T.taxCorr > 0 ? '−' : '+') + fmtZl(Math.abs(T.taxCorr))]);
-  totalRows.push(['Razem do wypłaty netto', '', fmtZl(T.netTotal)]);
-  $('totalNetTable').innerHTML = `<p class="text-sm font-semibold mb-2">Łącznie (ekwiwalent + odprawy)</p>` + rowsTable(['Pozycja', '', 'Kwota'], totalRows, totalRows.length - 1);
-
-  renderAudit(S, R);
-  renderSummary(S, R);
-  renderLeaveHelper(S, R);
-  renderLetterPreview(S, R);
-}
-
-function renderAudit(S, R) {
-  const A = R.audit;
-  const ekwDueInfo = R.ekw.due.rule === 'payday' ? `Automatycznie: ${fmtDate(R.ekw.due.date)} – termin wypłaty pensji (art. 171 § 4 K.p.).`
-    : R.ekw.due.rule === '10days' ? `Automatycznie: ${fmtDate(R.ekw.due.date)} – 10 dni od rozwiązania, bo pensja płatna ${fmtDate(R.ekw.due.payday)} (art. 171 § 5 K.p.).`
-      : `Automatycznie: ${fmtDate(R.ekw.due.date)} – dzień rozwiązania umowy.`;
-  $('dueEkwHint').textContent = ekwDueInfo;
-  $('paidOdpBox').hidden = !R.odp.eligible;
-  if (!A.rows.length) { $('auditTable').innerHTML = '<p class="text-sm text-slate-500">Brak świadczeń do audytu.</p>'; return; }
-  const body = A.rows.map((r) => `<tr>
-      <td>${esc(r.label)}</td>
-      <td class="v">${fmtZl(r.correct)}</td>
-      <td class="v">${r.paid == null ? '<span class="text-slate-400 font-normal">nie wypłacono</span>' : fmtZl(r.paid)}</td>
-      <td class="v ${r.pending ? 'text-slate-500' : (r.shortfall > 0 ? 'text-rose-700' : 'text-emerald-700')}">${r.pending ? fmtZl(r.shortfall) + '<br><span class="text-xs font-normal">jeszcze niewymagalne</span>' : (r.shortfall > 0 ? fmtZl(r.shortfall) : (r.overpaid > 0 ? 'nadpłata ' + fmtZl(r.overpaid) : 'OK'))}</td>
-      <td class="v font-normal">${fmtDate(r.due)}</td>
-      <td class="v font-normal">${r.days}</td>
-      <td class="v">${fmtZl(r.interest)}</td></tr>`).join('');
-  $('auditTable').innerHTML = `<table class="calc"><thead><tr><th>Świadczenie</th><th class="r">Należne</th><th class="r">Wypłacone</th><th class="r">Niedopłata</th><th class="r">Wymagalne</th><th class="r">Dni opóźn.</th><th class="r">Odsetki</th></tr></thead>
-    <tbody>${body}<tr class="total"><td>Razem</td><td></td><td></td><td class="v text-rose-700">${fmtZl(A.totalShort)}</td><td></td><td></td><td class="v">${fmtZl(A.totalInterest)}</td></tr></tbody></table>
-    <p class="hint">Odsetki ustawowe za opóźnienie ${fmtN(A.rate)}% w skali roku, liczone od dnia następującego po dniu wymagalności do ${fmtDate(A.calcDate)} (365 dni w roku). Przy opóźnieniach sprzed 5.03.2026 r. stawka była wyższa – wyliczenie jest ostrożne.${S.empBase != null && S.empBase < R.base.B ? ` Pracodawca przyjął podstawę ${fmtZl(S.empBase)}, czyli o ${fmtZl(r2(R.base.B - S.empBase))} niższą od prawidłowej.` : ''}</p>`;
-}
-
-function renderSummary(S, R) {
-  const T = R.tax, A = R.audit;
-  const line = (label, value, cls = '') => `<div class="flex justify-between gap-3 py-1.5 border-b border-slate-100"><span class="text-slate-600">${label}</span><span class="num font-semibold ${cls}">${value}</span></div>`;
-  let h = '';
-  h += line('Podstawa wymiaru', fmtZl(R.base.B));
-  h += line('Ekwiwalent brutto', fmtZl(R.ekw.gross));
-  h += line('Ekwiwalent netto', fmtZl(T.ekwNet));
-  if (R.odp.eligible) { h += line(`Odprawa ${R.odp.mult}× brutto`, fmtZl(R.odp.gross)); h += line('Odprawa netto', fmtZl(T.odpNet)); }
-  if (S.retire) h += line('Odprawa emeryt.-rentowa brutto', fmtZl(R.emer.gross));
-  h += `<div class="flex justify-between gap-3 py-2.5"><span class="font-bold">Razem netto</span><span class="num text-xl font-extrabold text-emerald-800">${fmtZl(T.netTotal)}</span></div>`;
-  if (A.allPending && A.totalShort > 0) {
-    h += `<div class="mt-2 rounded-xl bg-slate-50 ring-1 ring-slate-200 p-3"><p class="text-xs uppercase tracking-wide font-semibold text-slate-600">Pracodawca powinien wypłacić (brutto)</p><p class="num text-2xl font-extrabold text-slate-800">${fmtZl(A.totalShort)}</p><p class="text-xs text-slate-600">Po upływie terminu wymagalności wpisz w kroku 5 faktycznie wypłacone kwoty.</p></div>`;
-  } else if (A.rows.some((r) => r.paid != null) || A.totalShort > 0) {
-    h += `<div class="mt-2 rounded-xl ${A.totalShort > 0 ? 'bg-rose-50 ring-rose-200' : 'bg-emerald-50 ring-emerald-200'} ring-1 p-3">
-      <p class="text-xs uppercase tracking-wide font-semibold ${A.totalShort > 0 ? 'text-rose-700' : 'text-emerald-700'}">${A.totalShort > 0 ? 'Kwota niedopłaty pracodawcy' : 'Wypłata zgodna z wyliczeniem'}</p>
-      <p class="num text-2xl font-extrabold ${A.totalShort > 0 ? 'text-rose-800' : 'text-emerald-800'}">${fmtZl(A.totalShort)}</p>
-      ${A.totalShort > 0 ? `<p class="text-xs text-rose-800 num">+ odsetki na ${fmtDate(A.calcDate)}: ${fmtZl(A.totalInterest)}</p>` : ''}</div>`;
-  }
-  h += `<p class="hint mt-3">Termin wypłaty ekwiwalentu: <b>${fmtDate(R.ekw.due.date)}</b>${R.odp.eligible ? ` · limit odprawy: <b>${fmtZl(R.odp.cap)}</b>` : ''}</p>`;
-  $('summary').innerHTML = h;
-}
-
-function leaveHelperCalc(S) {
-  if (!S.start || !S.end) return null;
-  const annual = parseFloat(val('lvAnnual')) || 26;
-  const carry = num('lvCarry'), used = num('lvUsed');
-  const ey = new Date(S.end).getUTCFullYear();
-  const from = Math.max(S.start, Date.UTC(ey, 0, 1));
-  const months = new Date(S.end).getUTCMonth() - new Date(from).getUTCMonth() + 1;
-  const annualEtat = Math.ceil(r2(annual * S.etat));
-  const prop = Math.min(annualEtat, Math.ceil(r2(annualEtat * months / 12)));
-  const days = r2(carry + Math.max(0, prop - used));
-  return { annual, annualEtat, months, prop, carry, used, days, ey };
-}
-function renderLeaveHelper(S) {
-  const H = leaveHelperCalc(S);
-  $('leaveHelperOut').textContent = H ? `Urlop proporcjonalny za ${H.ey} r.: ${H.months} ${plural(H.months, 'miesiąc', 'miesiące', 'miesięcy')} pracy → ${H.annualEtat} × ${H.months}/12 = ${fmtN(H.annualEtat * H.months / 12)} → po zaokrągleniu w górę ${H.prop} dni. Do ekwiwalentu: ${fmtN(H.carry, 0)} zaległe + ${H.prop} − ${fmtN(H.used, 0)} wykorzystane = ${fmtN(H.days, H.days % 1 ? 2 : 0)} dni. (Niepełny miesiąc i niepełny dzień urlopu zaokrągla się w górę; jeśli wykorzystano więcej niż urlop proporcjonalny, nadwyżki się nie zwraca.)` : 'Podaj daty zatrudnienia i rozwiązania umowy.';
-}
-
-/* ======================================================================
-   TREŚĆ WEZWANIA (wspólna dla podglądu i PDF)
-   ====================================================================== */
-function readLetter() {
-  return {
-    empName: val('empName').trim(), empStreet: val('empStreet').trim(), empCity: val('empCity').trim(), empContact: val('empContact').trim(),
-    gender: val('gender'), erName: val('erName').trim(), erStreet: val('erStreet').trim(), erCity: val('erCity').trim(), erNip: val('erNip').trim(),
-    reasonText: val('reasonText').trim() || 'likwidacja stanowiska pracy',
-    iban: normIban(val('iban')), place: val('place').trim(), letterDate: parseDate(val('letterDate')) || todayUTC(),
-    payDays: Math.max(1, Math.floor(num('payDays')) || 7)
-  };
-}
-
-function buildLetter(S, R, L) {
-  const f = L.gender === 'f';
-  const g = (m, w) => (f ? w : m);
-  const er = L.erName || '[nazwa pracodawcy]';
-  const items = R.audit.rows.filter((r) => r.shortfall > 0);
-  const total = R.audit.totalShort;
-  const anyPaid = items.some((r) => r.paid != null && r.paid > 0);
-  const kinds = items.map((r) => r.key);
-  const subjParts = [];
-  if (kinds.includes('odp')) subjParts.push('odprawy pieniężnej');
-  if (kinds.includes('emer')) subjParts.push('odprawy emerytalno-rentowej');
-  if (kinds.includes('ekw')) subjParts.push('ekwiwalentu pieniężnego za niewykorzystany urlop wypoczynkowy');
-  const subtitle = (anyPaid ? 'o zapłatę wyrównania ' : 'o zapłatę ') + subjParts.join(' oraz ');
-  const iban = L.iban ? fmtIban(L.iban) : '[numer rachunku]';
-
-  const p = [];
-  p.push(`Działając we własnym imieniu, wzywam Pracodawcę – ${er} (dalej: „Pracodawca”) – do zapłaty na moją rzecz łącznej kwoty ${fmtZl(total)} brutto (słownie: ${amountInWords(total)}) tytułem:`);
-  const list = items.map((r, i) => `${r.paid != null && r.paid > 0 ? 'wyrównania ' : ''}${r.title} – ${fmtZl(r.shortfall)} brutto, wraz z odsetkami ustawowymi za opóźnienie od dnia ${fmtDate(r.due + DAY)} do dnia zapłaty${i < items.length - 1 ? ';' : ''}`);
-  const deadline = `– w terminie ${L.payDays} ${plural(L.payDays, 'dnia', 'dni', 'dni')} od dnia doręczenia niniejszego wezwania, przelewem na rachunek bankowy nr ${iban}${L.empName ? ' (posiadacz: ' + L.empName + ')' : ''}.`;
-
-  const just = [];
-  const how = S.reason === 'wypowiedzenie' ? 'w wyniku wypowiedzenia dokonanego przez Pracodawcę' : S.reason === 'porozumienie' ? 'na mocy porozumienia stron' : '';
-  just.push(`W okresie od ${fmtDate(S.start)} do ${fmtDate(S.end)} ${g('byłem zatrudniony', 'byłam zatrudniona')} u Pracodawcy na podstawie umowy o pracę${S.etat !== 1 ? ' w wymiarze ' + fmtEtat(S.etat) : ''}. Stosunek pracy uległ rozwiązaniu z dniem ${fmtDate(S.end)}${how ? ' ' + how : ''}${S.notice ? ` (oświadczenie doręczone ${fmtDate(S.notice)})` : ''}${S.reason !== 'inne' ? `, wyłącznie z przyczyn niedotyczących pracownika (${L.reasonText})` : ''}.`);
-  const b = R.base;
-  let baseTxt = `Podstawę wymiaru ekwiwalentu i odprawy ustala się według rozporządzenia Ministra Pracy i Polityki Socjalnej z dnia 8 stycznia 1997 r. w sprawie szczegółowych zasad udzielania urlopu wypoczynkowego, ustalania i wypłacania wynagrodzenia za czas urlopu oraz ekwiwalentu pieniężnego za urlop. Obejmuje ona składniki stałe w wysokości należnej w miesiącu rozwiązania stosunku pracy, składniki zmienne przysługujące za okresy nie dłuższe niż miesiąc (premie regulaminowe, prowizje, wynagrodzenie za pracę w godzinach nadliczbowych) – w średniej wysokości z 3 miesięcy poprzedzających miesiąc rozwiązania stosunku pracy – oraz składniki przysługujące za okresy dłuższe niż miesiąc – w średniej wysokości z 12 miesięcy. Prawidłowa podstawa wynosi ${fmtZl(b.B)} (składniki stałe ${fmtZl(b.fixedTotal)}, średnia składników zmiennych ${fmtZl(b.varAvg)}, średnia składników za okresy dłuższe niż miesiąc ${fmtZl(b.longAvg)}).`;
-  if (S.empBase != null && S.empBase < b.B) baseTxt += ` Pracodawca przyjął do obliczeń podstawę ${fmtZl(S.empBase)}, pomijając część składników wynagrodzenia, co jest niezgodne z powołanymi przepisami.`;
-  just.push(baseTxt);
-
-  for (const r of items) {
-    if (r.key === 'ekw') {
-      const dueRule = R.ekw.due.rule === 'payday' && r.dueNote !== 'data wskazana' ? `w terminie wypłaty wynagrodzenia, tj. ${fmtDate(r.due)} (art. 171 § 4 Kodeksu pracy)`
-        : R.ekw.due.rule === '10days' && r.dueNote !== 'data wskazana' ? `w terminie 10 dni od dnia rozwiązania stosunku pracy, tj. do ${fmtDate(r.due)} (art. 171 § 5 Kodeksu pracy)`
-          : `w dniu ${fmtDate(r.due)}`;
-      just.push(`Zgodnie z art. 171 § 1 Kodeksu pracy przysługuje mi ekwiwalent pieniężny za niewykorzystany urlop wypoczynkowy w wymiarze ${fmtN(R.ekw.hours, R.ekw.hours % 1 ? 2 : 0)} godz. Przy zastosowaniu współczynnika ${fmtN(R.ekw.coefEtat)} (§ 19 ww. rozporządzenia; rok ${R.ekw.C.year}, ${fmtEtat(S.etat)}) stawka za jeden dzień urlopu wynosi ${fmtZl(R.ekw.daily)}, za jedną godzinę – ${fmtZl(R.ekw.hourly)}, a należny ekwiwalent – ${fmtZl(R.ekw.gross)} brutto. ${r.paid != null && r.paid > 0 ? `Pracodawca wypłacił z tego tytułu ${fmtZl(r.paid)} brutto.` : 'Pracodawca nie wypłacił ekwiwalentu.'} Ekwiwalent należało wypłacić ${dueRule}.`);
-    }
-    if (r.key === 'odp') {
-      const multW = { 1: 'jednomiesięcznego', 2: 'dwumiesięcznego', 3: 'trzymiesięcznego' }[R.odp.mult];
-      const threshold = { 1: 'krótszy niż 2 lata', 2: 'od 2 do 8 lat', 3: 'ponad 8 lat' }[R.odp.mult];
-      just.push(`Pracodawca zatrudnia co najmniej 20 pracowników, a przyczyny niedotyczące pracowników stanowiły wyłączny powód rozwiązania ze mną stosunku pracy. Przysługuje mi zatem odprawa pieniężna na podstawie art. 8 ust. 1 ustawy z dnia 13 marca 2003 r. o szczególnych zasadach rozwiązywania z pracownikami stosunków pracy z przyczyn niedotyczących pracowników (w przypadku zwolnienia indywidualnego – w zw. z art. 10 ust. 1 tej ustawy). Mój okres zatrudnienia u Pracodawcy, liczony do dnia rozwiązania stosunku pracy, wyniósł ${fmtYMD(R.odp.tenure)}, a więc ${threshold}, wobec czego odprawa wynosi równowartość ${multW} wynagrodzenia obliczanego jak ekwiwalent za urlop: ${R.odp.mult} × ${fmtZl(b.B)} = ${fmtZl(R.odp.raw)}${R.odp.capped ? `, ograniczoną do limitu 15-krotności minimalnego wynagrodzenia obowiązującego w dniu rozwiązania stosunku pracy, tj. ${fmtZl(R.odp.cap)} (art. 8 ust. 4 ustawy)` : `. Kwota ta nie przekracza limitu 15-krotności minimalnego wynagrodzenia obowiązującego w dniu rozwiązania stosunku pracy (${fmtZl(R.odp.cap)}; art. 8 ust. 4 ustawy)`}. ${r.paid != null && r.paid > 0 ? `Pracodawca wypłacił z tego tytułu ${fmtZl(r.paid)} brutto.` : 'Pracodawca nie wypłacił odprawy.'} Odprawa stała się wymagalna z dniem ${fmtDate(r.due)}.`);
-    }
-    if (r.key === 'emer') {
-      just.push(`Na podstawie art. 92¹ Kodeksu pracy, w związku z ustaniem stosunku pracy w związku z przejściem na emeryturę lub rentę, przysługuje mi odprawa pieniężna w wysokości jednomiesięcznego wynagrodzenia, tj. ${fmtZl(R.emer.gross)} brutto. ${r.paid != null && r.paid > 0 ? `Pracodawca wypłacił z tego tytułu ${fmtZl(r.paid)} brutto.` : 'Pracodawca nie wypłacił odprawy.'}`);
-    }
-  }
-  just.push(`Łączna kwota niedopłaty wynosi ${fmtZl(total)} brutto. Szczegółowe wyliczenie krok po kroku zawiera załącznik do niniejszego wezwania.`);
-  just.push(`Na podstawie art. 481 § 1 i 2 Kodeksu cywilnego w zw. z art. 300 Kodeksu pracy od kwot niedopłaty należą się odsetki ustawowe za opóźnienie (${fmtN(R.audit.rate)}% w skali roku), które na dzień ${fmtDate(R.audit.calcDate)} wynoszą łącznie ${fmtZl(R.audit.totalInterest)} i są naliczane do dnia zapłaty.`);
-  just.push(`W przypadku bezskutecznego upływu wyznaczonego terminu skieruję sprawę do właściwego Sądu Rejonowego – Sądu Pracy bez ponownego wezwania, co narazi Pracodawcę na obowiązek zwrotu kosztów postępowania, oraz złożę skargę do Państwowej Inspekcji Pracy. Przypominam, że niewypłacenie w ustalonym terminie wynagrodzenia za pracę lub innego świadczenia przysługującego pracownikowi stanowi wykroczenie przeciwko prawom pracownika (art. 282 § 1 pkt 1 Kodeksu pracy).`);
-
-  return { subtitle, intro: p[0], list, deadline, just, total, items };
-}
-
-function renderLetterPreview(S, R) {
-  const L = readLetter();
-  const box = $('letterPreview');
-  if (!R.audit.rows.length || R.audit.totalShort <= 0) {
-    box.innerHTML = '<p class="text-slate-500">Brak niedopłaty do dochodzenia. Wpisz w kroku 5 kwoty faktycznie wypłacone przez pracodawcę – podgląd wezwania pojawi się automatycznie.</p>';
-    return;
-  }
-  const W = buildLetter(S, R, L);
-  box.innerHTML = `
-    <div class="flex justify-between gap-4 text-sm"><div>${esc(L.empName || '[imię i nazwisko]')}<br>${esc(L.empStreet || '[adres]')}<br>${esc(L.empCity || '')}</div><div class="text-right">${esc(L.place || '[miejscowość]')}, ${fmtDate(L.letterDate)}</div></div>
-    <div class="mt-4 ml-auto w-fit text-sm text-left">${esc(L.erName || '[pracodawca]')}<br>${esc(L.erStreet || '')}<br>${esc(L.erCity || '')}</div>
-    <p class="mt-5 text-center font-bold tracking-wide">PRZEDSĄDOWE WEZWANIE DO ZAPŁATY</p>
-    <p class="text-center text-sm">${esc(W.subtitle)}</p>
-    <p class="mt-4">${esc(W.intro)}</p>
-    <ol class="list-decimal pl-6 mt-2 space-y-1">${W.list.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>
-    <p class="mt-2">${esc(W.deadline)}</p>
-    <p class="mt-4 text-center font-bold">Uzasadnienie</p>
-    ${W.just.map((x) => `<p class="mt-2 text-justify">${esc(x)}</p>`).join('')}
-    <p class="mt-6">Z poważaniem</p><p class="mt-6">……………………………………<br><span class="text-xs">(podpis)</span></p>
-    <p class="mt-4 text-xs text-slate-500">Załącznik: wyliczenie krok po kroku (tabele podstawy, ekwiwalentu, odprawy, niedopłaty i odsetek) – dołączane w PDF.</p>`;
-}
-
-/* ======================================================================
-   PDF (pdfmake – ładowany dopiero po kliknięciu)
-   ====================================================================== */
-function loadScript(src) {
-  return new Promise((resolve, reject) => {
-    const s = document.createElement('script');
-    s.src = src; s.async = true; s.onload = resolve; s.onerror = () => reject(new Error('Nie udało się wczytać ' + src));
-    document.head.appendChild(s);
-  });
-}
-let pdfReady = null;
-function ensurePdfMake() {
-  // vfs_fonts.js rejestruje czcionkę Roboto (z polskimi znakami) przez pdfMake.addVirtualFileSystem
-  if (!pdfReady) pdfReady = loadScript(PDFMAKE_URL).then(() => loadScript(VFS_URL)).catch((e) => { pdfReady = null; throw e; });
-  return pdfReady;
-}
-function pdfTable(head, rows, widths, totalIdx) {
-  return {
-    table: {
-      headerRows: 1, widths,
-      body: [head.map((h) => ({ text: h, style: 'th' })), ...rows.map((r, i) => r.map((c, j) => ({ text: String(c).replace(/−/g, '-'), alignment: j === r.length - 1 ? 'right' : 'left', bold: i === totalIdx, fontSize: j === 1 && r.length === 3 ? 8 : 9 })))]
-    },
-    layout: 'lightHorizontalLines', margin: [0, 2, 0, 10]
-  };
-}
-function buildPdfDoc(S, R, L) {
-  const W = buildLetter(S, R, L);
-  const P = proofRows(S, R);
-  const sender = [L.empName, L.empStreet, L.empCity, L.empContact].filter(Boolean).join('\n');
-  const recipient = [L.erName, L.erStreet, L.erCity, L.erNip ? 'NIP/KRS: ' + L.erNip : ''].filter(Boolean).join('\n');
-  const auditRows = R.audit.rows.map((r) => [r.label, fmtZl(r.correct), r.paid == null ? '0,00 zł' : fmtZl(r.paid), fmtZl(r.shortfall), fmtDate(r.due), String(r.days), fmtZl(r.interest)]);
-  auditRows.push(['Razem', '', '', fmtZl(R.audit.totalShort), '', '', fmtZl(R.audit.totalInterest)]);
-
-  const annex = [
-    { text: 'Załącznik nr 1 – Wyliczenie krok po kroku', style: 'h2', pageBreak: 'before' },
-    { text: `Stan prawny na dzień sporządzenia pisma. Zaokrąglenia do pełnych groszy na każdym etapie. Wymiar etatu: ${fmtEtat(S.etat)}, dobowa norma czasu pracy: ${S.norma} h.`, style: 'small', margin: [0, 0, 0, 8] },
-    { text: 'Tabela 1. Podstawa wymiaru (miesięczna)', style: 'h3' },
-    pdfTable(['Składnik', 'Wyliczenie', 'Kwota'], P.base, ['*', '*', 'auto'], 3)
-  ];
-  const kinds = R.audit.rows.map((r) => r.key);
-  if (kinds.includes('ekw')) annex.push({ text: 'Tabela 2. Ekwiwalent za niewykorzystany urlop (art. 171 K.p.)', style: 'h3' }, pdfTable(['Krok', 'Wyliczenie', 'Wynik'], P.ekw, ['*', '*', 'auto'], 4));
-  if (kinds.includes('odp')) annex.push({ text: 'Tabela 3. Odprawa pieniężna (art. 8 ustawy z 13.03.2003 r.)', style: 'h3' }, pdfTable(['Krok', 'Wyliczenie', 'Wynik'], P.odp, ['*', '*', 'auto'], 4));
-  if (kinds.includes('emer')) annex.push({ text: 'Tabela 4. Odprawa emerytalno-rentowa (art. 92¹ K.p.)', style: 'h3' }, pdfTable(['Pozycja', 'Wyliczenie', 'Wynik'], P.emer, ['*', '*', 'auto'], 0));
-  annex.push(
-    { text: 'Zestawienie niedopłaty i odsetek ustawowych za opóźnienie', style: 'h3' },
-    pdfTable(['Świadczenie', 'Należne', 'Wypłacone', 'Niedopłata', 'Wymagalne', 'Dni', 'Odsetki'], auditRows, ['*', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'], auditRows.length - 1),
-    { text: `Odsetki: ${fmtN(R.audit.rate)}% w skali roku (art. 481 § 2 K.c.), od dnia następującego po dniu wymagalności do ${fmtDate(R.audit.calcDate)}; wzór: niedopłata × ${fmtN(R.audit.rate)}% × dni ÷ 365. Odsetki biegną dalej do dnia zapłaty.`, style: 'small' }
-  );
-
-  return {
-    pageSize: 'A4',
-    pageMargins: [56, 48, 56, 56],
-    info: { title: 'Przedsądowe wezwanie do zapłaty', author: L.empName || '', subject: W.subtitle },
-    defaultStyle: { font: 'Roboto', fontSize: 10, lineHeight: 1.25 },
-    styles: {
-      title: { fontSize: 14, bold: true, alignment: 'center', margin: [0, 18, 0, 2] },
-      subtitle: { fontSize: 10, alignment: 'center', margin: [0, 0, 0, 14] },
-      h2: { fontSize: 12, bold: true, margin: [0, 0, 0, 6] },
-      h3: { fontSize: 10, bold: true, margin: [0, 6, 0, 3] },
-      th: { bold: true, fontSize: 8, color: '#334155', fillColor: '#f1f5f9' },
-      small: { fontSize: 8, color: '#475569' },
-      just: { alignment: 'justify', margin: [0, 0, 0, 6] }
-    },
-    footer: (page, pages) => ({
-      columns: [
-        { text: CONFIG.pdfBranding ? `Wyliczenie: ${CONFIG.siteName} · stan prawny 24.10.2026` : '', fontSize: 7, color: '#94a3b8' },
-        { text: `Strona ${page} z ${pages}`, alignment: 'right', fontSize: 7, color: '#94a3b8' }
-      ],
-      margin: [56, 20, 56, 0]
-    }),
-    content: [
-      { columns: [{ text: sender || ' ', width: '*' }, { text: `${L.place || ''}${L.place ? ', ' : ''}dnia ${fmtDate(L.letterDate)}`, alignment: 'right', width: 'auto' }] },
-      { text: recipient || ' ', margin: [260, 18, 0, 0], bold: true },
-      { text: 'PRZEDSĄDOWE WEZWANIE DO ZAPŁATY', style: 'title' },
-      { text: W.subtitle, style: 'subtitle' },
-      { text: W.intro, style: 'just' },
-      { ol: W.list, margin: [10, 0, 0, 6] },
-      { text: W.deadline, style: 'just' },
-      { text: 'Uzasadnienie', bold: true, alignment: 'center', margin: [0, 8, 0, 6] },
-      ...W.just.map((t) => ({ text: t, style: 'just' })),
-      { text: 'Z poważaniem', margin: [0, 14, 0, 30] },
-      { text: '……………………………………', margin: [0, 0, 0, 0] },
-      { text: '(podpis)', fontSize: 8, margin: [30, 0, 0, 14] },
-      { text: 'Załączniki:', bold: true, fontSize: 9 },
-      { ol: ['Wyliczenie krok po kroku (załącznik nr 1).'], fontSize: 9 },
-      ...annex
-    ]
-  };
-}
-async function generatePdf() {
-  const S = readState(), R = compute(S), L = readLetter();
-  await ensurePdfMake();
-  const doc = buildPdfDoc(S, R, L);
-  window.pdfMake.createPdf(doc).download(`wezwanie-do-zaplaty-${isoDate(L.letterDate)}.pdf`);
-}
-
-/* ======================================================================
-   WALIDACJA WEZWANIA + MODAL PŁATNOŚCI
-   ====================================================================== */
-function validateLetter() {
-  const S = readState(), R = compute(S), L = readLetter();
-  const errs = [];
-  if (!R.ok) errs.push(...R.errors);
-  else if (R.audit.totalShort <= 0) errs.push('Brak niedopłaty – uzupełnij w kroku 5 kwoty wypłacone przez pracodawcę.');
-  else if (R.audit.allPending) errs.push(`Świadczenia nie są jeszcze wymagalne (najbliższy termin: ${fmtDate(Math.min(...R.audit.rows.map((r) => r.due)))}). Wezwanie wyślij po tym terminie albo wpisz kwotę wypłaconą / zaoferowaną przez pracodawcę.`);
-  if (!L.empName) errs.push('Podaj imię i nazwisko.');
-  if (!L.erName) errs.push('Podaj nazwę pracodawcy.');
-  if (!L.iban || !ibanValid(L.iban)) errs.push('Podaj poprawny numer rachunku IBAN.');
-  return { errs, R };
-}
-function configured(url) { return /^https:\/\/\S+$/.test(url || ''); }
-
-function openPaywall(R) {
-  $('pwPrice').textContent = CONFIG.pdfPrice;
-  $('pwAmount').textContent = fmtZl(R.audit.totalShort);
-  const pays = [];
-  if (configured(CONFIG.buyCoffeeUrl)) pays.push(`<a href="${esc(CONFIG.buyCoffeeUrl)}" target="_blank" rel="noopener" class="block text-center rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold px-4 py-3">Zapłać ${esc(CONFIG.pdfPrice)} – BLIK / karta (BuyCoffee.to)</a>`);
-  if (configured(CONFIG.paymentLinkUrl)) pays.push(`<a href="${esc(CONFIG.paymentLinkUrl)}" target="_blank" rel="noopener" class="block text-center rounded-xl bg-slate-900 hover:bg-black text-white font-bold px-4 py-3">Zapłać ${esc(CONFIG.pdfPrice)} – BLIK / karta</a>`);
-  $('pwPayButtons').innerHTML = pays.join('');
-  $('pwBlik').textContent = CONFIG.blikPhone ? `Możesz też wysłać przelew BLIK na telefon: ${CONFIG.blikPhone} (tytuł: „Wezwanie PDF”).` : '';
-  const mode = (pays.length || CONFIG.blikPhone) ? CONFIG.paywallMode : 'free';
-  let unlock = '';
-  if (mode === 'code') {
-    unlock = `<label class="lbl" for="pwCode">Kod odblokowujący (otrzymasz go po płatności)</label>
-      <div class="flex gap-2"><input class="inp" id="pwCode" autocomplete="off"><button type="button" id="pwCheck" class="rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-semibold px-4">Sprawdź</button></div>
-      <p class="text-sm text-rose-700 mt-1" id="pwCodeErr"></p>`;
-  } else if (mode === 'honor') {
-    unlock = `<label class="flex gap-2.5 items-start text-sm"><input type="checkbox" class="chk" id="pwConfirm"> <span>Potwierdzam, że ${esc(CONFIG.pdfPrice)} zostało opłacone.</span></label>`;
-  }
-  unlock += `<button type="button" id="pwDownload" class="mt-3 w-full rounded-xl bg-rose-700 hover:bg-rose-800 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold px-4 py-3" ${mode === 'free' ? '' : 'disabled'}>Pobierz PDF</button><p class="text-sm text-rose-700 mt-1" id="pwErr" role="alert"></p>`;
-  $('pwUnlock').innerHTML = unlock;
-  $('pwLead').innerHTML = lawLeadHtml(true, readState(), R);
-
-  const dl = $('pwDownload');
-  if (mode === 'honor') $('pwConfirm').addEventListener('change', (e) => { dl.disabled = !e.target.checked; });
-  if (mode === 'code') {
-    $('pwCheck').addEventListener('click', async () => {
-      const ok = await checkCode($('pwCode').value);
-      $('pwCodeErr').textContent = ok ? '' : 'Nieprawidłowy kod.';
-      dl.disabled = !ok;
-    });
-  }
-  dl.addEventListener('click', async () => {
-    dl.disabled = true; const label = dl.textContent; dl.textContent = 'Generuję PDF…';
-    try { await generatePdf(); $('pwErr').textContent = ''; }
-    catch (err) { $('pwErr').textContent = 'Nie udało się wygenerować PDF. Sprawdź połączenie z internetem i spróbuj ponownie.'; console.error(err); }
-    dl.textContent = label; dl.disabled = false;
-  });
-  $('paywall').hidden = false;
-  document.body.style.overflow = 'hidden';
-  $('pwClose').focus();
-}
-function closePaywall() { $('paywall').hidden = true; document.body.style.overflow = ''; }
-async function checkCode(code) {
-  const c = String(code || '').trim().toUpperCase();
-  if (!c || !window.crypto || !crypto.subtle) return false;
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(c));
-  const hex = [...new Uint8Array(buf)].map((x) => x.toString(16).padStart(2, '0')).join('');
-  return CONFIG.unlockCodeHashes.map((h) => h.toLowerCase()).includes(hex);
-}
-
-/* Kancelaria partnerska */
-function lawLeadHtml(compact, S, R) {
-  const F = CONFIG.lawFirm;
-  const summary = R && R.ok ? `Podstawa: ${fmtZl(R.base.B)}; ekwiwalent: ${fmtZl(R.ekw.gross)}; odprawa: ${fmtZl(R.odp.gross)}; niedopłata: ${fmtZl(R.audit.totalShort)}; staż: ${fmtYMD(R.odp.tenure)}; rozwiązanie umowy: ${S.end ? fmtDate(S.end) : '-'}.` : '';
-  const btn = 'inline-block rounded-lg font-semibold px-4 py-2 ';
-  const ctas = [];
-  if (configured(F.url)) ctas.push(`<a class="${btn}${compact ? 'bg-slate-800 text-white' : 'bg-emerald-500 hover:bg-emerald-400 text-slate-900'}" href="${esc(F.url)}" target="_blank" rel="noopener">Umów konsultację</a>`);
-  if (F.email) ctas.push(`<a class="${btn}${compact ? 'bg-white ring-1 ring-slate-300 text-slate-800' : 'bg-white/10 ring-1 ring-white/30 text-white hover:bg-white/20'}" href="mailto:${esc(F.email)}?subject=${encodeURIComponent('Konsultacja – odprawa / ekwiwalent za urlop')}&body=${encodeURIComponent('Dzień dobry,\nproszę o analizę mojego rozliczenia z pracodawcą.\n\n' + summary + '\n\n')}">Napisz do kancelarii</a>`);
-  if (F.phone) ctas.push(`<a class="${btn}${compact ? 'bg-white ring-1 ring-slate-300 text-slate-800' : 'bg-white/10 ring-1 ring-white/30 text-white hover:bg-white/20'}" href="tel:${esc(F.phone.replace(/\s/g, ''))}">${esc(F.phone)}</a>`);
-  if (!ctas.length) {
-    const pip = `<a class="${btn}${compact ? 'bg-white ring-1 ring-slate-300 text-slate-800' : 'bg-white/10 ring-1 ring-white/30 text-white hover:bg-white/20'}" href="https://www.pip.gov.pl" target="_blank" rel="noopener">Bezpłatne porady prawne PIP</a>`;
-    const partner = CONFIG.contactEmail ? `<a class="${btn}${compact ? 'bg-slate-800 text-white' : 'bg-emerald-500 hover:bg-emerald-400 text-slate-900'}" href="mailto:${esc(CONFIG.contactEmail)}?subject=${encodeURIComponent('Współpraca – kancelaria partnerska')}">Jesteś kancelarią? Zostań partnerem</a>` : '';
-    return compact ? `<p class="font-semibold text-slate-700">Spór jest bardziej złożony?</p><p class="mt-1">Skorzystaj z bezpłatnych porad prawnych Państwowej Inspekcji Pracy.</p><div class="mt-2 flex flex-wrap gap-2">${pip}${partner}</div>` : pip + partner;
-  }
-  return compact ? `<p class="font-semibold text-slate-700">${esc(F.name || 'Kancelaria Prawa Pracy')} – analiza wypowiedzenia i spory z pracodawcą</p><p class="mt-1">Sprawa jest złożona albo pracodawca odmawia zapłaty? Skonsultuj się z prawnikiem.</p><div class="mt-2 flex flex-wrap gap-2">${ctas.join('')}</div>` : ctas.join('');
-}
-function renderLawCard(S, R) {
-  const F = CONFIG.lawFirm;
-  if (F.name) $('lawTitle').textContent = `${F.name} – Analiza Wypowiedzenia i Spory z Pracodawcą`;
-  $('lawCtas').innerHTML = lawLeadHtml(false, S, R);
-}
-
-/* ======================================================================
-   PRZYKŁADY, ZAPIS LOKALNY, ZDARZENIA
-   ====================================================================== */
-const FIELD_IDS = ['startDate', 'noticeDate', 'endDate', 'etat', 'etatCustom', 'norma', 'reason', 'employer20', 'under26', 'retire', 'extraY', 'extraM', 'extraD',
-  'fixedSalary', 'fixedOther', 'var1', 'var2', 'var3', 'topUp', 'dw1', 'dw2', 'dw3', 'dn1', 'dn2', 'dn3', 'long12',
-  'leaveDays', 'leaveHours', 'payDay', 'payMode', 'lvAnnual', 'lvCarry', 'lvUsed', 'pitRate', 'kup', 'pit2',
-  'paidEkw', 'paidOdp', 'paidEmer', 'empBase', 'calcDate', 'rate', 'dueEkw', 'dueOdp',
-  'empName', 'empStreet', 'empCity', 'empContact', 'gender', 'erName', 'erStreet', 'erCity', 'erNip', 'reasonText', 'iban', 'place', 'letterDate', 'payDays'];
-
-const EXAMPLES = {
-  B: { startDate: '2018-07-01', noticeDate: '2026-06-15', endDate: '2026-09-30', etat: '1', norma: '8', reason: 'wypowiedzenie', employer20: true, under26: false, retire: false,
-    fixedSalary: '6000', fixedOther: '', var1: '1000', var2: '1100', var3: '900', topUp: false, long12: '2400', leaveMode: 'days', leaveDays: '10', payDay: '10', payMode: 'next',
-    pitRate: '12', kup: '0', pit2: false, paidEkw: '2868', paidOdp: '18000', paidEmer: '', empBase: '6000', rate: '9,25', reasonText: 'likwidacja stanowiska pracy', payDays: '7' },
-  A: { startDate: '2018-10-15', noticeDate: '2026-10-20', endDate: '2027-01-31', etat: '1', norma: '8', reason: 'wypowiedzenie', employer20: true, under26: false, retire: false,
-    fixedSalary: '21000', fixedOther: '', var1: '3400', var2: '3600', var3: '3500', topUp: false, long12: '6000', leaveMode: 'days', leaveDays: '11', payDay: '10', payMode: 'next',
-    pitRate: '32', kup: '0', pit2: false, paidEkw: '', paidOdp: '', paidEmer: '', empBase: '', rate: '9,25', reasonText: 'redukcja etatów', payDays: '7', lvAnnual: '26', lvCarry: '8', lvUsed: '0' }
-};
-
-function setField(id, v) {
-  const el = $(id); if (!el) return;
-  if (el.type === 'checkbox') el.checked = !!v; else el.value = v == null ? '' : v;
-}
-function loadExample(key) {
-  const ex = EXAMPLES[key];
-  ['extraY', 'extraM', 'extraD', 'dueEkw', 'dueOdp', 'etatCustom', 'leaveHours', 'dw1', 'dw2', 'dw3', 'dn1', 'dn2', 'dn3', 'lvCarry', 'lvUsed'].forEach((id) => setField(id, ''));
-  Object.entries(ex).forEach(([k, v]) => { if (k === 'leaveMode') document.querySelector(`input[name="leaveMode"][value="${v}"]`).checked = true; else setField(k, v); });
-  setField('calcDate', isoDate(todayUTC()));
-  setField('letterDate', isoDate(todayUTC()));
-  update();
-}
-function saveState() {
-  try {
-    const data = {};
-    FIELD_IDS.forEach((id) => { const el = $(id); if (el) data[id] = el.type === 'checkbox' ? el.checked : el.value; });
-    data.leaveMode = radio('leaveMode');
-    localStorage.setItem(STORE_KEY, JSON.stringify(data));
-  } catch (e) { /* pamięć przeglądarki niedostępna */ }
-}
-function restoreState() {
-  try {
-    const raw = localStorage.getItem(STORE_KEY);
-    if (!raw) return false;
-    const data = JSON.parse(raw);
-    FIELD_IDS.forEach((id) => { if (id in data) setField(id, data[id]); });
-    if (data.leaveMode) { const r = document.querySelector(`input[name="leaveMode"][value="${data.leaveMode}"]`); if (r) r.checked = true; }
-    return true;
-  } catch (e) { return false; }
-}
-function clearAll() {
-  try { localStorage.removeItem(STORE_KEY); } catch (e) { /* brak dostępu */ }
-  FIELD_IDS.forEach((id) => { const el = $(id); if (!el) return; if (el.type === 'checkbox') el.checked = false; else if (el.tagName === 'SELECT') el.selectedIndex = 0; else el.value = ''; });
-  document.querySelector('input[name="leaveMode"][value="days"]').checked = true;
-  setField('employer20', true);
-  setField('calcDate', isoDate(todayUTC()));
-  setField('letterDate', isoDate(todayUTC()));
-  update();
-}
-
-function update() {
-  const S = readState();
-  const R = compute(S);
-  render(S, R);
-  renderLawCard(S, R);
-  const ib = normIban(val('iban'));
-  $('iban').classList.toggle('bad', !!ib && !ibanValid(ib));
-  $('ibanHint').textContent = ib ? (ibanValid(ib) ? '✓ Numer rachunku poprawny' : 'Sprawdź numer – suma kontrolna IBAN się nie zgadza.') : '';
-  saveState();
-}
-let timer = null;
-function scheduleUpdate() { clearTimeout(timer); timer = setTimeout(update, 120); }
-
-document.addEventListener('input', scheduleUpdate);
-document.addEventListener('change', scheduleUpdate);
-document.querySelectorAll('[data-example]').forEach((b) => b.addEventListener('click', () => loadExample(b.dataset.example)));
-$('btnClear').addEventListener('click', () => { if (confirm('Usunąć wszystkie wpisane dane z tej przeglądarki?')) clearAll(); });
-document.querySelectorAll('[data-notice]').forEach((b) => b.addEventListener('click', () => {
-  const n = parseDate(val('noticeDate'));
-  if (!n) { alert('Najpierw podaj datę doręczenia wypowiedzenia.'); return; }
-  const d = new Date(n);
-  // okres wypowiedzenia liczony w miesiącach kończy się w ostatnim dniu miesiąca (art. 30 § 2¹ K.p.)
-  const k = +b.dataset.notice;
-  setField('endDate', isoDate(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + k + 1, 0)));
-  update();
-}));
-$('btnLeaveApply').addEventListener('click', () => {
-  const H = leaveHelperCalc(readState());
-  if (!H) return;
-  document.querySelector('input[name="leaveMode"][value="days"]').checked = true;
-  setField('leaveDays', String(H.days).replace('.', ','));
-  update();
-});
-$('btnSimulate').addEventListener('click', () => {
-  const R = compute(readState());
-  if (!R.ok) return;
-  setField('empBase', String(R.sim.B).replace('.', ','));
-  setField('paidEkw', String(R.sim.ekw).replace('.', ','));
-  if (R.odp.eligible) setField('paidOdp', String(R.sim.odp).replace('.', ','));
-  if (R.emer.gross) setField('paidEmer', String(R.sim.emer).replace('.', ','));
-  update();
-});
-$('btnPdf').addEventListener('click', () => {
-  const { errs, R } = validateLetter();
-  $('pdfError').textContent = errs.join(' ');
-  if (errs.length) return;
-  openPaywall(R);
-});
-$('pwClose').addEventListener('click', closePaywall);
-$('paywall').addEventListener('click', (e) => { if (e.target.id === 'paywall') closePaywall(); });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('paywall').hidden) closePaywall(); });
-
-/* Start */
-(function init() {
-  document.querySelectorAll('[data-site-name]').forEach((el) => { el.textContent = CONFIG.siteName; });
-  $('year').textContent = new Date().getFullYear();
-  if (CONFIG.contactEmail) $('contactLine').innerHTML = `· Kontakt: <a class="underline" href="mailto:${esc(CONFIG.contactEmail)}">${esc(CONFIG.contactEmail)}</a>`;
-  if (!restoreState()) loadExample('B');
-  if (!val('calcDate')) setField('calcDate', isoDate(todayUTC()));
-  if (!val('letterDate')) setField('letterDate', isoDate(todayUTC()));
-  update();
-})();
-</script>
+<script src="config.js"></script>
+<script src="assets/calc.js"></script>
+<script src="assets/app.js"></script>
 </body>
 </html>

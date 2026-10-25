@@ -1,0 +1,14 @@
+{
+  "name": "sprawdz-odprawe",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Kalkulator odprawy i ekwiwalentu za urlop 2026/2027 z audytem i generatorem wezwania do zapłaty (statyczna strona, bez backendu).",
+  "scripts": {
+    "build:css": "tailwindcss -i src/input.css -o assets/app.css --minify",
+    "test": "node --test tests/calc.test.mjs"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.3",
+    "tailwindcss": "4.3.3"
+  }
+}

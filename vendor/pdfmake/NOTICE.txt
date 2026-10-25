@@ -1,0 +1,4 @@
+pdfmake 0.2.23 (https://github.com/bpampuch/pdfmake) – licencja MIT, zob. LICENSE-pdfmake.txt.
+Pliki pdfmake.min.js i vfs_fonts.js są niezmienionymi kopiami z pakietu npm pdfmake@0.2.23 (katalog build/).
+vfs_fonts.js zawiera czcionkę Roboto (Google) – Apache License 2.0, zob. LICENSE-Roboto-Apache-2.0.txt.
+Sumy kontrolne: SHA384SUMS (weryfikacja: sha384sum -c SHA384SUMS).

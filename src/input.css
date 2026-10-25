@@ -1,0 +1,43 @@
+/*
+ * Źródło arkusza stylów. Po zmianie klas w index.html lub assets/app.js przebuduj:
+ *   npm install && npm run build:css
+ * Wynik: assets/app.css (jedyny arkusz ładowany przez stronę).
+ */
+@import "tailwindcss" source(none);
+@source "../index.html";
+@source "../assets/app.js";
+
+@layer components {
+  html { scroll-behavior: smooth; }
+  body { background: #f8fafc; color: #0f172a; -webkit-font-smoothing: antialiased; }
+  .inp { width: 100%; box-sizing: border-box; border: 1px solid #cbd5e1; border-radius: .6rem; padding: .55rem .75rem; font-size: .95rem; line-height: 1.4; background: #fff; color: #0f172a; font-variant-numeric: tabular-nums; }
+  .inp:focus { outline: 2px solid #10b981; outline-offset: 1px; border-color: #10b981; }
+  .inp:disabled { background: #f1f5f9; color: #64748b; }
+  .inp.bad { border-color: #e11d48; }
+  .lbl { display: block; font-size: .8rem; font-weight: 600; color: #334155; margin-bottom: .3rem; }
+  .hint { font-size: .75rem; color: #64748b; margin-top: .3rem; line-height: 1.4; }
+  .num { font-variant-numeric: tabular-nums; }
+  .chk { width: 1.05rem; height: 1.05rem; accent-color: #047857; flex: none; margin-top: .15rem; }
+  table.calc { width: 100%; border-collapse: collapse; font-size: .875rem; }
+  table.calc th { text-align: left; font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; color: #64748b; font-weight: 600; padding: .5rem; border-bottom: 1px solid #e2e8f0; }
+  table.calc th.r { text-align: right; }
+  table.calc td { padding: .55rem .5rem; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
+  table.calc td.v { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 600; }
+  table.calc td.f { color: #475569; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .78rem; }
+  table.calc tr.total td { border-top: 2px solid #0f172a; border-bottom: none; font-weight: 700; }
+  @media (max-width: 640px) {
+    table.calc { font-size: .8rem; }
+    table.calc th, table.calc td { padding: .45rem .3rem; }
+    table.calc td.f { font-size: .7rem; word-break: break-word; }
+  }
+  .paper { font-family: Georgia, "Times New Roman", serif; }
+  details > summary { cursor: pointer; list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .chev { transform: rotate(180deg); }
+}
+
+[hidden] { display: none !important; }
+
+@media print {
+  header, footer, #paywall, .no-print { display: none !important; }
+}
