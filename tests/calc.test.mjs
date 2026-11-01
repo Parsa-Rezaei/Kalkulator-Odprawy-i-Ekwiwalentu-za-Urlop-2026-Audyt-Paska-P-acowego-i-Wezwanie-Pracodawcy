@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 
-const code = readFileSync(new URL('../assets/calc.js', import.meta.url), 'utf8');
+const code = readFileSync(new URL('../public/assets/calc.js', import.meta.url), 'utf8');
 const sandbox = {};
 vm.runInNewContext(code, sandbox);
 const C = sandbox.OdprawaCalc;
