@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Polityka bezpieczeństwa: tylko własne pliki, brak skryptów i stylów z zewnątrz -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Kalkulator Odprawy i Ekwiwalentu za Urlop 2026/2027 – Audyt Rozliczenia + Wezwanie do Zapłaty</title>
+<meta name="description" content="Oblicz odprawę (1×, 2× lub 3× pensji, limit 72 090 zł w 2026 i 74 250 zł w 2027 r.) oraz ekwiwalent za urlop (współczynnik 20,92). Sprawdź, czy pracodawca nie zaniżył wypłaty, policz odsetki 9,25% i pobierz przedsądowe wezwanie do zapłaty w PDF.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#065f46">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Kalkulator Odprawy i Ekwiwalentu za Urlop 2026/2027 – Audyt + Wezwanie do Zapłaty">
+<meta property="og:description" content="Sprawdź, czy pracodawca dobrze policzył Twoją odprawę i ekwiwalent za urlop. Limit 2027: 74 250 zł. Odsetki i gotowe wezwanie do zapłaty PDF.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23065f46'/%3E%3Ctext x='32' y='44' font-family='Arial' font-size='34' font-weight='700' fill='white' text-anchor='middle'%3E%C2%A7%3C/text%3E%3C/svg%3E">
+
+<link rel="stylesheet" href="assets/app.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Kalkulator Odprawy i Ekwiwalentu za Urlop 2026/2027 – Audyt Rozliczenia z Pracodawcą",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Dowolny (przeglądarka internetowa)",
+  "inLanguage": "pl-PL",
+  "description": "Darmowy kalkulator odprawy pieniężnej (art. 8 ustawy o zwolnieniach grupowych), odprawy emerytalno-rentowej (art. 92¹ K.p.) i ekwiwalentu za niewykorzystany urlop (art. 171 K.p.) według przepisów 2026/2027, z audytem wypłaty, odsetkami ustawowymi za opóźnienie i generatorem przedsądowego wezwania do zapłaty w PDF.",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "PLN"
+  },
+  "featureList": [
+    "Ekwiwalent za urlop ze współczynnikiem 20,92 (2026) i zaokrąglaniem krok po kroku",
+    "Odprawa 1×/2×/3× z limitem 15-krotności minimalnego wynagrodzenia (72 090 zł w 2026, 74 250 zł w 2027)",
+    "Podstawa wymiaru ze składnikami zmiennymi z 3 i 12 miesięcy",
+    "Wynagrodzenie netto: ZUS, składka zdrowotna, PIT, ulga dla młodych",
+    "Audyt niedopłaty i odsetki ustawowe za opóźnienie",
+    "Generator przedsądowego wezwania do zapłaty w PDF"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ile wynosi współczynnik ekwiwalentowy w 2026 roku?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Dla pełnego etatu 20,92: rok 2026 ma 251 dni pracy (365 dni minus 52 niedziele, 52 soboty i 10 świąt przypadających w inne dni niż niedziela, w tym Wigilia), a 251 / 12 = 20,92. Dla 3/4 etatu współczynnik wynosi 15,69, dla 1/2 etatu 10,46, a dla 1/4 etatu 5,23. Stosuje się współczynnik z roku, w którym ustał stosunek pracy – także do zaległego urlopu z lat poprzednich." }
+    },
+    {
+      "@type": "Question",
+      "name": "Jak obliczyć ekwiwalent za niewykorzystany urlop?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Miesięczną podstawę dzieli się przez współczynnik (20,92 × wymiar etatu) i zaokrągla do groszy – to stawka dzienna. Stawkę dzienną dzieli się przez dobową normę czasu pracy (zwykle 8 godzin) i ponownie zaokrągla do groszy – to stawka godzinowa. Ekwiwalent brutto to stawka godzinowa pomnożona przez liczbę godzin niewykorzystanego urlopu." }
+    },
+    {
+      "@type": "Question",
+      "name": "Kiedy pracodawca musi wypłacić ekwiwalent za urlop od 27 stycznia 2026 r.?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Zgodnie z art. 171 § 4 Kodeksu pracy ekwiwalent wypłaca się w terminie wypłaty wynagrodzenia obowiązującym u pracodawcy. Jeżeli ten termin przypada przed dniem rozwiązania umowy, ekwiwalent trzeba wypłacić w ciągu 10 dni od rozwiązania lub wygaśnięcia stosunku pracy (art. 171 § 5 K.p.)." }
+    },
+    {
+      "@type": "Question",
+      "name": "Komu przysługuje odprawa z ustawy o zwolnieniach grupowych?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Pracownikowi pracodawcy zatrudniającego co najmniej 20 pracowników, z którym umowę rozwiązano z przyczyn niedotyczących pracownika (np. likwidacja stanowiska, redukcja etatów) – w drodze wypowiedzenia przez pracodawcę albo porozumienia stron. Przy zwolnieniu indywidualnym przyczyny niedotyczące pracownika muszą być wyłącznym powodem rozwiązania umowy (art. 10 ust. 1 ustawy)." }
+    },
+    {
+      "@type": "Question",
+      "name": "Ile wynosi odprawa i jaki jest maksymalny limit w 2026 i 2027 roku?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Odprawa wynosi jednomiesięczne wynagrodzenie przy stażu u danego pracodawcy krótszym niż 2 lata, dwumiesięczne przy stażu od 2 do 8 lat i trzymiesięczne przy stażu ponad 8 lat. Nie może przekroczyć 15-krotności minimalnego wynagrodzenia obowiązującego w dniu rozwiązania stosunku pracy: 72 090 zł w 2026 r. (4806 zł × 15) i 74 250 zł w 2027 r. (4950 zł × 15)." }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy do stażu uprawniającego do odprawy wlicza się okres wypowiedzenia?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Tak. Stosunek pracy trwa do ostatniego dnia okresu wypowiedzenia, więc staż liczy się do dnia rozwiązania umowy. Przekroczenie 8 lat choćby o jeden dzień oznacza odprawę trzymiesięczną zamiast dwumiesięcznej. Wlicza się także m.in. okres, za który przysługuje odszkodowanie za skrócone wypowiedzenie (art. 36¹ § 1 K.p.)." }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy od odprawy pobiera się składki ZUS i podatek?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Odprawa z tytułu rozwiązania stosunku pracy z przyczyn niedotyczących pracownika oraz odprawa emerytalno-rentowa są zwolnione ze składek ZUS i składki zdrowotnej. Podlegają natomiast podatkowi PIT (12% lub 32%), z wyjątkiem osób do 26. roku życia objętych ulgą dla młodych (do 85 528 zł przychodu rocznie). Ekwiwalent za urlop podlega składkom ZUS, składce zdrowotnej i PIT." }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy premie, prowizje i nadgodziny wchodzą do podstawy odprawy i ekwiwalentu?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Tak. Składniki stałe uwzględnia się w wysokości należnej w miesiącu rozwiązania umowy, składniki zmienne za okresy nie dłuższe niż miesiąc (premie regulaminowe, prowizje, wynagrodzenie za nadgodziny) – w średniej z 3 miesięcy poprzedzających ten miesiąc, a składniki za okresy dłuższe (premie kwartalne, roczne) – w średniej z 12 miesięcy. Nie wlicza się m.in. nagród jubileuszowych, jednorazowych wypłat za określone osiągnięcie, wynagrodzenia chorobowego i dodatkowego wynagrodzenia rocznego." }
+    },
+    {
+      "@type": "Question",
+      "name": "Ile mam czasu na dochodzenie zaległej odprawy lub ekwiwalentu?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Roszczenia ze stosunku pracy przedawniają się z upływem 3 lat od dnia, w którym stały się wymagalne (art. 291 § 1 Kodeksu pracy). Od niewypłaconej w terminie kwoty należą się odsetki ustawowe za opóźnienie – od 5 marca 2026 r. 9,25% w skali roku." }
+    },
+    {
+      "@type": "Question",
+      "name": "Czy kalkulator wysyła gdzieś moje dane?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Nie. Wszystkie obliczenia i generowanie PDF odbywają się lokalnie w Twojej przeglądarce. Strona nie ładuje skryptów z zewnętrznych serwerów. Dane są zapamiętywane w pamięci tej przeglądarki tylko wtedy, gdy zaznaczysz taką opcję (numer konta nigdy), i możesz je w każdej chwili usunąć przyciskiem „Wyczyść dane”. Przy płatności za PDF formularz jest na chwilę przechowywany wyłącznie w pamięci bieżącej karty, a do serwera trafia tylko losowy identyfikator zamówienia." }
+    }
+  ]
+}
+</script>
+</head>
+<body class="min-h-screen">
+
+<!-- ===================== NAGŁÓWEK ===================== -->
+<header class="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-slate-200">
+  <div class="mx-auto max-w-7xl px-4 h-14 flex items-center justify-between gap-4">
+    <a href="#" class="flex items-center gap-2 font-bold text-emerald-800 shrink-0">
+      <span class="inline-grid place-items-center w-8 h-8 rounded-lg bg-emerald-800 text-white text-lg">§</span>
+      <span data-site-name>SprawdźOdprawę.pl</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-5 text-sm text-slate-600">
+      <a class="hover:text-emerald-700" href="#kalkulator">Kalkulator</a>
+      <a class="hover:text-emerald-700" href="#audyt">Audyt wypłaty</a>
+      <a class="hover:text-emerald-700" href="#wezwanie">Wezwanie PDF</a>
+      <a class="hover:text-emerald-700" href="#wzory">Wzory</a>
+      <a class="hover:text-emerald-700" href="#faq">FAQ</a>
+    </nav>
+    <a href="#wezwanie" class="text-sm font-semibold bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg px-3 py-1.5 shrink-0"><span class="sm:hidden">Wezwanie</span><span class="hidden sm:inline">Wezwanie do zapłaty</span></a>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="bg-gradient-to-b from-emerald-900 to-emerald-800 text-white">
+  <div class="mx-auto max-w-7xl px-4 py-10 md:py-14">
+    <p class="text-emerald-200 text-sm font-semibold tracking-wide uppercase">Stan prawny na 24 października 2026 r.</p>
+    <h1 class="mt-2 text-2xl md:text-4xl font-extrabold leading-tight max-w-5xl">Kompleksowy Kalkulator Odprawy i Ekwiwalentu za Urlop 2026/2027 – Audyt Rozliczenia z Pracodawcą + Generator Wezwania do Zapłaty</h1>
+    <p class="mt-4 text-emerald-50/90 max-w-3xl md:text-lg">Zwolnienie z pracy, likwidacja stanowiska albo redukcja etatów? Policz odprawę i ekwiwalent za niewykorzystany urlop dokładnie tak, jak wymaga tego Kodeks pracy, sprawdź, czy pracodawca nie pominął premii i prowizji, i jednym kliknięciem przygotuj wezwanie do zapłaty z odsetkami.</p>
+    <ul class="mt-6 flex flex-wrap gap-2 text-sm">
+      <li class="bg-white/10 ring-1 ring-white/20 rounded-full px-3 py-1">Współczynnik 2026: <b>20,92</b></li>
+      <li class="bg-white/10 ring-1 ring-white/20 rounded-full px-3 py-1">Limit odprawy 2026: <b>72 090 zł</b></li>
+      <li class="bg-white/10 ring-1 ring-white/20 rounded-full px-3 py-1">Limit odprawy 2027: <b>74 250 zł</b></li>
+      <li class="bg-white/10 ring-1 ring-white/20 rounded-full px-3 py-1">Odsetki za opóźnienie: <b>9,25%</b></li>
+      <li class="bg-white/10 ring-1 ring-white/20 rounded-full px-3 py-1">Dane zostają w Twojej przeglądarce</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== GŁÓWNY UKŁAD ===================== -->
+<main id="kalkulator" class="mx-auto max-w-7xl px-4 py-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px] items-start">
+
+  <div class="space-y-6 min-w-0">
+
+    <!-- Przykłady / reset -->
+    <div class="flex flex-wrap items-center gap-2 text-sm no-print">
+      <span class="text-slate-500">Wczytaj przykład:</span>
+      <button type="button" data-example="B" class="rounded-lg bg-white ring-1 ring-slate-300 hover:ring-emerald-500 px-3 py-1.5">Zaniżona odprawa (umowa do 30.09.2026)</button>
+      <button type="button" data-example="A" class="rounded-lg bg-white ring-1 ring-slate-300 hover:ring-emerald-500 px-3 py-1.5">Wypowiedzenie X 2026 → limit 2027</button>
+      <button type="button" id="btnClear" class="rounded-lg text-rose-700 hover:bg-rose-50 px-3 py-1.5 ml-auto">Wyczyść dane</button>
+      <label class="w-full flex gap-2 items-start text-xs text-slate-600"><input type="checkbox" class="chk" id="remember"> <span>Zapamiętaj wpisane dane na tym urządzeniu (bez numeru konta). Nie zaznaczaj na komputerze współdzielonym.</span></label>
+    </div>
+
+    <!-- ========== KROK 1 ========== -->
+    <section class="bg-white rounded-2xl ring-1 ring-slate-200 shadow-sm p-5 md:p-6">
+      <h2 class="text-lg font-bold flex items-center gap-2"><span class="inline-grid place-items-center w-7 h-7 rounded-full bg-emerald-100 text-emerald-800 text-sm">1</span> Zatrudnienie i rozwiązanie umowy</h2>
+      <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div>
+          <label class="lbl" for="startDate">Data rozpoczęcia pracy u tego pracodawcy</label>
+          <input class="inp" type="date" id="startDate">
+        </div>
+        <div>
+          <label class="lbl" for="noticeDate">Data doręczenia wypowiedzenia / porozumienia</label>
+          <input class="inp" type="date" id="noticeDate">
+          <p class="hint">Opcjonalnie – pozwala wykryć „przeskok” limitu na 2027 r.</p>
+        </div>
+        <div>
+          <label class="lbl" for="endDate">Data rozwiązania umowy (ostatni dzień pracy)</label>
+          <input class="inp" type="date" id="endDate">
+          <div class="mt-1.5 flex gap-1.5 text-xs no-print">
+            <button type="button" class="rounded-md bg-slate-100 hover:bg-emerald-100 px-2 py-1" data-notice="1">+1 mies. wypowiedzenia</button>
+            <button type="button" class="rounded-md bg-slate-100 hover:bg-emerald-100 px-2 py-1" data-notice="3">+3 mies. wypowiedzenia</button>
+          </div>
+        </div>
+        <div>
+          <label class="lbl" for="etat">Wymiar etatu</label>
+          <select class="inp" id="etat">
+            <option value="1">Pełny etat (1/1)</option>
+            <option value="0.75">3/4 etatu</option>
+            <option value="0.5">1/2 etatu</option>
+            <option value="0.25">1/4 etatu</option>
+            <option value="custom">Inny wymiar…</option>
+          </select>
+          <input class="inp mt-2" id="etatCustom" placeholder="np. 3/5 lub 0,6" maxlength="12" hidden>
+        </div>
+        <div>
+          <label class="lbl" for="norma">Dobowa norma czasu pracy</label>
+          <select class="inp" id="norma">
+            <option value="8">8 godzin (standard)</option>
+            <option value="7">7 godzin (umiarkowany / znaczny stopień niepełnosprawności)</option>
+          </select>
+        </div>
+        <div>
+          <label class="lbl" for="reason">Sposób i przyczyna rozwiązania umowy</label>
+          <select class="inp" id="reason">
+            <option value="wypowiedzenie">Wypowiedzenie przez pracodawcę – przyczyny niedotyczące pracownika</option>
+            <option value="porozumienie">Porozumienie stron – przyczyny niedotyczące pracownika</option>
+            <option value="inne">Inna przyczyna (wypowiedzenie przez pracownika, dyscyplinarka, koniec umowy na czas określony…)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mt-4 grid gap-3 sm:grid-cols-2">
+        <label class="flex gap-2.5 items-start text-sm"><input type="checkbox" class="chk" id="employer20"> <span>Pracodawca zatrudnia <b>co najmniej 20 pracowników</b> <span class="text-slate-500">(warunek odprawy z art. 8 ustawy)</span></span></label>
+        <label class="flex gap-2.5 items-start text-sm"><input type="checkbox" class="chk" id="under26"> <span>Mam <b>mniej niż 26 lat</b> <span class="text-slate-500">(ulga dla młodych – 0% PIT do 85 528 zł rocznie)</span></span></label>
+        <label class="flex gap-2.5 items-start text-sm"><input type="checkbox" class="chk" id="retire"> <span>Umowa ustaje w związku z <b>przejściem na emeryturę lub rentę</b> <span class="text-slate-500">(odprawa z art. 92¹ K.p.)</span></span></label>
+      </div>
+
+      <details class="mt-4 rounded-xl bg-slate-50 ring-1 ring-slate-200 px-4 py-3">
+        <summary class="text-sm font-semibold text-slate-700 flex items-center justify-between">Dodatkowe okresy wliczane do stażu u tego pracodawcy <span class="chev transition">▾</span></summary>
+        <p class="hint mt-2">Np. wcześniejsze umowy z tym samym pracodawcą, zatrudnienie u poprzednika przy przejściu zakładu pracy (art. 23¹ K.p.) albo okres objęty odszkodowaniem za skrócone wypowiedzenie (art. 36¹ § 1 K.p.). Okres wypowiedzenia do daty rozwiązania umowy jest już uwzględniony automatycznie.</p>
+        <div class="mt-3 grid grid-cols-3 gap-3 max-w-md">
+          <div><label class="lbl" for="extraY">Lata</label><input class="inp" id="extraY" inputmode="numeric" placeholder="0" maxlength="3"></div>
+          <div><label class="lbl" for="extraM">Miesiące</label><input class="inp" id="extraM" inputmode="numeric" placeholder="0" maxlength="4"></div>
+          <div><label class="lbl" for="extraD">Dni</label><input class="inp" id="extraD" inputmode="numeric" placeholder="0" maxlength="5"></div>
+        </div>
+      </details>
+    </section>
+
+    <!-- ========== KROK 2 ========== -->
+    <section class="bg-white rounded-2xl ring-1 ring-slate-200 shadow-sm p-5 md:p-6">
+      <h2 class="text-lg font-bold flex items-center gap-2"><span class="inline-grid place-items-center w-7 h-7 rounded-full bg-emerald-100 text-emerald-800 text-sm">2</span> Podstawa wymiaru (miesięczne wynagrodzenie brutto)</h2>
+      <p class="hint">Ta sama podstawa służy do obliczenia ekwiwalentu i odprawy (rozporządzenie MPiPS z 8.01.1997 r.; art. 8 ustawy o zwolnieniach grupowych; art. 92¹ K.p.).</p>
+
+      <h3 class="mt-5 text-sm font-bold text-slate-800">a) Składniki stałe – w wysokości z miesiąca rozwiązania umowy</h3>
+      <div class="mt-2 grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="lbl" for="fixedSalary">Wynagrodzenie zasadnicze (brutto / mies.)</label>
+          <input class="inp" id="fixedSalary" inputmode="decimal" placeholder="np. 6000" maxlength="16">
+        </div>
+        <div>
+          <label class="lbl" for="fixedOther">Inne stałe dodatki miesięczne</label>
+          <input class="inp" id="fixedOther" inputmode="decimal" placeholder="np. dodatek funkcyjny, stażowy" maxlength="16">
+        </div>
+      </div>
+
+      <h3 class="mt-5 text-sm font-bold text-slate-800">b) Składniki zmienne miesięczne – średnia z 3 miesięcy poprzedzających miesiąc rozwiązania</h3>
+      <p class="hint">Premie regulaminowe, prowizje, wynagrodzenie i dodatki za nadgodziny, dodatki za pracę w nocy itp. – kwoty wypłacone za dany miesiąc.</p>
+      <div class="mt-2 grid gap-4 sm:grid-cols-3">
+        <div><label class="lbl" for="var1" id="lblVar1">Miesiąc −3</label><input class="inp" id="var1" inputmode="decimal" placeholder="0" maxlength="16"></div>
+        <div><label class="lbl" for="var2" id="lblVar2">Miesiąc −2</label><input class="inp" id="var2" inputmode="decimal" placeholder="0" maxlength="16"></div>
+        <div><label class="lbl" for="var3" id="lblVar3">Miesiąc −1</label><input class="inp" id="var3" inputmode="decimal" placeholder="0" maxlength="16"></div>
+      </div>
+      <label class="mt-3 flex gap-2.5 items-start text-sm"><input type="checkbox" class="chk" id="topUp"> <span>Byłem/byłam nieobecny(-a) w tych miesiącach (np. L4) i składniki zmienne są przez to niższe – <b>zastosuj dopełnienie podstawy</b></span></label>
+      <div id="topUpBox" class="mt-3 grid gap-3 sm:grid-cols-3" hidden>
+        <div class="rounded-xl bg-slate-50 p-3 ring-1 ring-slate-200"><p class="text-xs font-semibold text-slate-600" id="lblTop1">Miesiąc −3</p><div class="mt-2 grid grid-cols-2 gap-2"><div><label class="lbl" for="dw1">Dni przepracowane</label><input class="inp" id="dw1" inputmode="numeric" maxlength="4"></div><div><label class="lbl" for="dn1">Dni nominalne</label><input class="inp" id="dn1" inputmode="numeric" maxlength="4"></div></div></div>
+        <div class="rounded-xl bg-slate-50 p-3 ring-1 ring-slate-200"><p class="text-xs font-semibold text-slate-600" id="lblTop2">Miesiąc −2</p><div class="mt-2 grid grid-cols-2 gap-2"><div><label class="lbl" for="dw2">Dni przepracowane</label><input class="inp" id="dw2" inputmode="numeric" maxlength="4"></div><div><label class="lbl" for="dn2">Dni nominalne</label><input class="inp" id="dn2" inputmode="numeric" maxlength="4"></div></div></div>
+        <div class="rounded-xl bg-slate-50 p-3 ring-1 ring-slate-200"><p class="text-xs font-semibold text-slate-600" id="lblTop3">Miesiąc −1</p><div class="mt-2 grid grid-cols-2 gap-2"><div><label class="lbl" for="dw3">Dni przepracowane</label><input class="inp" id="dw3" inputmode="numeric" maxlength="4"></div><div><label class="lbl" for="dn3">Dni nominalne</label><input class="inp" id="dn3" inputmode="numeric" maxlength="4"></div></div></div>
+        <p class="hint sm:col-span-3">Dopełnienie: (suma składników zmiennych ÷ dni przepracowane) × dni nominalne do przepracowania ÷ 3.</p>
+      </div>
+
+      <h3 class="mt-5 text-sm font-bold text-slate-800">c) Składniki za okresy dłuższe niż 1 miesiąc – średnia z 12 miesięcy</h3>
+      <div class="mt-2 grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="lbl" for="long12" id="lblLong12">Suma premii kwartalnych / półrocznych / rocznych wypłaconych w ostatnich 12 miesiącach</label>
+          <input class="inp" id="long12" inputmode="decimal" placeholder="0" maxlength="16">
+          <p class="hint">Bez nagród jubileuszowych, „trzynastki”, nagród uznaniowych i jednorazowych wypłat za określone osiągnięcie (§ 6 rozporządzenia).</p>
+        </div>
+        <div id="baseMini" class="rounded-xl bg-emerald-50 ring-1 ring-emerald-200 p-4 self-start" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ========== KROK 3 ========== -->
+    <section class="bg-white rounded-2xl ring-1 ring-slate-200 shadow-sm p-5 md:p-6">
+      <h2 class="text-lg font-bold flex items-center gap-2"><span class="inline-grid place-items-center w-7 h-7 rounded-full bg-emerald-100 text-emerald-800 text-sm">3</span> Niewykorzystany urlop i termin wypłaty</h2>
+      <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div>
+          <span class="lbl">Podaję niewykorzystany urlop w</span>
+          <div class="flex gap-4 text-sm py-2">
+            <label class="flex items-center gap-2"><input type="radio" name="leaveMode" value="days" class="chk" checked> dniach</label>
+            <label class="flex items-center gap-2"><input type="radio" name="leaveMode" value="hours" class="chk"> godzinach</label>
+          </div>
+        </div>
+        <div id="leaveDaysBox">
+          <label class="lbl" for="leaveDays">Liczba dni niewykorzystanego urlopu</label>
+          <input class="inp" id="leaveDays" inputmode="decimal" placeholder="np. 10" maxlength="7">
+          <p class="hint" id="leaveDaysHint">1 dzień urlopu = 8 godzin.</p>
+        </div>
+        <div id="leaveHoursBox" hidden>
+          <label class="lbl" for="leaveHours">Liczba godzin niewykorzystanego urlopu</label>
+          <input class="inp" id="leaveHours" inputmode="decimal" placeholder="np. 80" maxlength="8">
+        </div>
+        <div>
+          <label class="lbl" for="payDay">Dzień wypłaty pensji u pracodawcy</label>
+          <div class="flex gap-2">
+            <input class="inp w-20" id="payDay" inputmode="numeric" placeholder="10" maxlength="2">
+            <select class="inp" id="payMode">
+              <option value="next">następnego miesiąca (z dołu)</option>
+              <option value="same">tego samego miesiąca</option>
+            </select>
+          </div>
+          <p class="hint">Potrzebne do terminu wypłaty ekwiwalentu (art. 171 § 4–5 K.p.).</p>
+        </div>
+      </div>
+
+      <details class="mt-4 rounded-xl bg-slate-50 ring-1 ring-slate-200 px-4 py-3" id="leaveHelper">
+        <summary class="text-sm font-semibold text-slate-700 flex items-center justify-between">Nie wiesz, ile dni urlopu Ci przysługuje? Policz urlop proporcjonalny <span class="chev transition">▾</span></summary>
+        <div class="mt-3 grid gap-3 sm:grid-cols-4">
+          <div><label class="lbl" for="lvAnnual">Roczny wymiar</label><select class="inp" id="lvAnnual"><option value="26">26 dni (staż ≥ 10 lat)</option><option value="20">20 dni (staż &lt; 10 lat)</option></select></div>
+          <div><label class="lbl" for="lvCarry">Zaległy urlop z lat ubiegłych (dni)</label><input class="inp" id="lvCarry" inputmode="decimal" placeholder="0" maxlength="6"></div>
+          <div><label class="lbl" for="lvUsed">Wykorzystane w roku rozwiązania (dni)</label><input class="inp" id="lvUsed" inputmode="decimal" placeholder="0" maxlength="6"></div>
+          <div class="flex items-end"><button type="button" id="btnLeaveApply" class="w-full rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-semibold px-3 py-2.5">Wstaw wynik</button></div>
+        </div>
+        <p class="hint mt-2" id="leaveHelperOut"></p>
+      </details>
+    </section>
+
+    <!-- ========== KROK 4 ========== -->
+    <section class="bg-white rounded-2xl ring-1 ring-slate-200 shadow-sm p-5 md:p-6">
+      <h2 class="text-lg font-bold flex items-center gap-2"><span class="inline-grid place-items-center w-7 h-7 rounded-full bg-emerald-100 text-emerald-800 text-sm">4</span> Podatek i składki (wyliczenie netto)</h2>
+      <div class="mt-5 grid gap-4 sm:grid-cols-3">
+        <div>
+          <label class="lbl" for="pitRate">Stawka PIT</label>
+          <select class="inp" id="pitRate">
+            <option value="12">12% (dochód roczny do 120 000 zł)</option>
+            <option value="32">32% (po przekroczeniu 120 000 zł)</option>
+          </select>
+          <p class="hint" id="pitHint"></p>
+        </div>
+        <div>
+          <label class="lbl" for="kup">Koszty uzyskania przychodu w tej wypłacie</label>
+          <select class="inp" id="kup">
+            <option value="0">0 zł – rozliczone już przy pensji</option>
+            <option value="250">250 zł (standardowe)</option>
+            <option value="300">300 zł (podwyższone – dojazd)</option>
+          </select>
+        </div>
+        <div>
+          <span class="lbl">Kwota zmniejszająca podatek</span>
+          <label class="flex gap-2.5 items-start text-sm py-2"><input type="checkbox" class="chk" id="pit2"> <span>Uwzględnij PIT-2 (300 zł) w tej wypłacie</span></label>
+        </div>
+      </div>
+      <p class="hint mt-3">KUP i kwotę zmniejszającą pracodawca stosuje raz w miesiącu do całego przychodu. Zaznacz je tylko wtedy, gdy odprawa i ekwiwalent są wypłacane bez innego wynagrodzenia w tym miesiącu. Składki ZUS pracownika od ekwiwalentu: 13,71% (emerytalna 9,76%, rentowa 1,50%, chorobowa 2,45%) + zdrowotna 9%. Wyliczenie nie uwzględnia rocznego limitu podstawy składek emerytalno-rentowych (30-krotność).</p>
+    </section>
+
+    <!-- ========== WYNIKI ========== -->
+    <div id="alerts" class="space-y-3" aria-live="polite"></div>
+
+    <section class="bg-white rounded-2xl ring-1 ring-slate-200 shadow-sm p-5 md:p-6">
+      <div class="flex flex-wrap items-baseline justify-between gap-2">
+        <h2 class="text-lg font-bold">Moduł A · Ekwiwalent za niewykorzystany urlop <span class="text-slate-400 font-normal">(art. 171 K.p.)</span></h2>
+        <span class="text-xs text-slate-500" id="coefBadge"></span>
+      </div>
+      <div class="mt-4 overflow-x-auto" id="ekwTable"></div>
+      <div class="mt-4 overflow-x-auto" id="ekwNetTable"></div>
+    </section>
+
+    <section class="bg-white rounded-2xl ring-1 ring-slate-200 shadow-sm p-5 md:p-6">
+      <h2 class="text-lg font-bold">Moduł B · Odprawa pieniężna <span class="text-slate-400 font-normal">(art. 8 ustawy o zwolnieniach grupowych; art. 92¹ K.p.)</span></h2>
+      <div class="mt-4 overflow-x-auto" id="odpTable"></div>
+      <div class="mt-4 overflow-x-auto" id="emerTable"></div>
+      <div class="mt-4 overflow-x-auto" id="totalNetTable"></div>
+    </section>
+
+    <!-- ========== AUDYT ========== -->
+    <section id="audyt" class="bg-white rounded-2xl ring-1 ring-slate-200 shadow-sm p-5 md:p-6 scroll-mt-20">
+      <h2 class="text-lg font-bold flex items-center gap-2"><span class="inline-grid place-items-center w-7 h-7 rounded-full bg-rose-100 text-rose-800 text-sm">5</span> Audyt rozliczenia – ile faktycznie wypłacił pracodawca?</h2>
+      <p class="hint">Wpisz kwoty brutto z ostatniego paska płacowego (lub z oferty pracodawcy). Puste pole = nic nie wypłacono.</p>
+      <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div><label class="lbl" for="paidEkw">Wypłacony ekwiwalent (brutto)</label><input class="inp" id="paidEkw" inputmode="decimal" placeholder="np. 2868" maxlength="16"></div>
+        <div id="paidOdpBox"><label class="lbl" for="paidOdp">Wypłacona odprawa (brutto)</label><input class="inp" id="paidOdp" inputmode="decimal" placeholder="np. 18000" maxlength="16"></div>
+        <div id="paidEmerBox" hidden><label class="lbl" for="paidEmer">Wypłacona odprawa emerytalno-rentowa (brutto)</label><input class="inp" id="paidEmer" inputmode="decimal" placeholder="0" maxlength="16"></div>
+        <div><label class="lbl" for="empBase">Podstawa przyjęta przez pracodawcę (opcjonalnie)</label><input class="inp" id="empBase" inputmode="decimal" placeholder="np. 6000" maxlength="16"></div>
+        <div><label class="lbl" for="calcDate">Odsetki liczone na dzień</label><input class="inp" type="date" id="calcDate"></div>
+        <div><label class="lbl" for="rate">Odsetki ustawowe za opóźnienie (% rocznie)</label><input class="inp" id="rate" inputmode="decimal" placeholder="9,25" maxlength="6"><p class="hint">Od 5.03.2026: stopa referencyjna NBP 3,75% + 5,5 p.p. = 9,25%.</p></div>
+      </div>
+      <details class="mt-3 rounded-xl bg-slate-50 ring-1 ring-slate-200 px-4 py-3">
+        <summary class="text-sm font-semibold text-slate-700 flex items-center justify-between">Własne daty wymagalności (opcjonalnie) <span class="chev transition">▾</span></summary>
+        <div class="mt-3 grid gap-3 sm:grid-cols-2">
+          <div><label class="lbl" for="dueEkw">Ekwiwalent wymagalny dnia</label><input class="inp" type="date" id="dueEkw"><p class="hint" id="dueEkwHint"></p></div>
+          <div><label class="lbl" for="dueOdp">Odprawa wymagalna dnia</label><input class="inp" type="date" id="dueOdp"><p class="hint">Domyślnie: dzień rozwiązania stosunku pracy.</p></div>
+        </div>
+      </details>
+      <div class="mt-3 flex flex-wrap gap-2 no-print">
+        <button type="button" id="btnSimulate" class="rounded-lg bg-slate-800 hover:bg-slate-900 text-white text-sm font-semibold px-3 py-2">Symuluj typowy błąd: pracodawca liczy tylko od pensji zasadniczej</button>
+      </div>
+      <p class="hint mt-5 sm:hidden">Przesuń tabelę w bok, aby zobaczyć wszystkie kolumny.</p>
+      <div class="mt-2 sm:mt-5 overflow-x-auto" id="auditTable"></div>
+    </section>
+
+    <!-- ========== WEZWANIE ========== -->
+    <section id="wezwanie" class="bg-white rounded-2xl ring-1 ring-slate-200 shadow-sm p-5 md:p-6 scroll-mt-20">
+      <h2 class="text-lg font-bold flex items-center gap-2"><span class="inline-grid place-items-center w-7 h-7 rounded-full bg-rose-100 text-rose-800 text-sm">6</span> Generator przedsądowego wezwania do zapłaty (PDF, A4)</h2>
+      <p class="hint">Kalkulator, audyt i podgląd są bezpłatne; płatny (<span data-price>14,99 zł</span>, BLIK) jest wyłącznie plik PDF wezwania. Dokument zawiera pełne wyliczenie krok po kroku, 7-dniowy termin zapłaty, numer rachunku oraz uprzedzenie o skierowaniu sprawy do Sądu Pracy i Państwowej Inspekcji Pracy.</p>
+
+      <div class="mt-5 grid gap-6 md:grid-cols-2">
+        <fieldset class="space-y-3">
+          <legend class="text-sm font-bold text-slate-800 mb-1">Pracownik (nadawca)</legend>
+          <div><label class="lbl" for="empName">Imię i nazwisko *</label><input class="inp" id="empName" autocomplete="name" maxlength="100"></div>
+          <div><label class="lbl" for="empStreet">Ulica i numer</label><input class="inp" id="empStreet" autocomplete="address-line1" maxlength="120"></div>
+          <div><label class="lbl" for="empCity">Kod pocztowy i miejscowość</label><input class="inp" id="empCity" placeholder="00-000 Miasto" maxlength="80"></div>
+          <div><label class="lbl" for="empContact">E-mail / telefon (opcjonalnie)</label><input class="inp" id="empContact" maxlength="100"></div>
+          <div><label class="lbl" for="gender">Forma gramatyczna w piśmie</label><select class="inp" id="gender"><option value="m">męska (byłem zatrudniony)</option><option value="f">żeńska (byłam zatrudniona)</option></select></div>
+        </fieldset>
+        <fieldset class="space-y-3">
+          <legend class="text-sm font-bold text-slate-800 mb-1">Pracodawca (adresat)</legend>
+          <div><label class="lbl" for="erName">Nazwa pracodawcy *</label><input class="inp" id="erName" placeholder="np. ABC Sp. z o.o." maxlength="160"></div>
+          <div><label class="lbl" for="erStreet">Ulica i numer</label><input class="inp" id="erStreet" maxlength="120"></div>
+          <div><label class="lbl" for="erCity">Kod pocztowy i miejscowość</label><input class="inp" id="erCity" maxlength="80"></div>
+          <div><label class="lbl" for="erNip">NIP / KRS (opcjonalnie)</label><input class="inp" id="erNip" maxlength="40"></div>
+          <div><label class="lbl" for="reasonText">Przyczyna rozwiązania (opis)</label><input class="inp" id="reasonText" placeholder="likwidacja stanowiska pracy" maxlength="160"></div>
+        </fieldset>
+      </div>
+      <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="lg:col-span-2"><label class="lbl" for="iban">Numer rachunku bankowego (IBAN) *</label><input class="inp" id="iban" placeholder="PL00 0000 0000 0000 0000 0000 0000" autocomplete="off" spellcheck="false" maxlength="42"><p class="hint" id="ibanHint"></p></div>
+        <div><label class="lbl" for="place">Miejscowość pisma</label><input class="inp" id="place" placeholder="Warszawa" maxlength="60"></div>
+        <div><label class="lbl" for="letterDate">Data pisma</label><input class="inp" type="date" id="letterDate"></div>
+        <div><label class="lbl" for="payDays">Termin zapłaty (dni od doręczenia)</label><input class="inp" id="payDays" inputmode="numeric" placeholder="7" maxlength="2"></div>
+      </div>
+
+      <div class="mt-5">
+        <p class="text-sm font-semibold text-slate-700">Podgląd treści wezwania</p>
+        <div id="letterPreview" class="paper mt-2 max-h-[28rem] overflow-y-auto rounded-xl bg-[#fffdf7] ring-1 ring-amber-200 p-5 text-[15px] leading-relaxed text-slate-800"></div>
+      </div>
+
+      <div class="mt-5 flex flex-wrap items-center gap-3 no-print">
+        <button type="button" id="btnPdf" class="rounded-xl bg-rose-700 hover:bg-rose-800 text-white font-bold px-5 py-3 shadow-sm">Pobierz wezwanie do zapłaty (PDF)</button>
+        <p class="text-sm text-rose-700" id="pdfError" role="alert"></p>
+      </div>
+    </section>
+
+    <!-- ========== KANCELARIA (lead) ========== -->
+    <section id="kancelaria" class="rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white p-5 md:p-6 shadow-sm">
+      <p class="text-xs uppercase tracking-wider text-emerald-300 font-semibold">Pomoc prawna</p>
+      <h2 class="mt-1 text-xl font-bold" id="lawTitle">Spór z pracodawcą? Gdzie szukać pomocy</h2>
+      <p class="mt-2 text-slate-300 text-sm max-w-2xl" id="lawText">Wypowiedzenie budzi wątpliwości, pracodawca kwestionuje wyliczenie albo w grę wchodzi przywrócenie do pracy lub odszkodowanie? Termin na odwołanie od wypowiedzenia do sądu pracy wynosi tylko 21 dni od jego doręczenia (art. 264 K.p.).</p>
+      <div class="mt-4 flex flex-wrap gap-3" id="lawCtas"></div>
+      <div id="partnerSlot" class="mt-5 rounded-xl border border-dashed border-white/30 p-4 text-sm text-slate-300" hidden>
+        <p class="font-semibold text-white">Miejsce dla partnera – kontakt</p>
+        <p class="mt-1">Prowadzisz kancelarię prawa pracy? To miejsce jest wolne.</p>
+        <a id="partnerContact" class="mt-2 inline-block underline hover:text-white" hidden>Napisz do nas</a>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ========== PANEL PODSUMOWANIA ========== -->
+  <aside class="lg:sticky lg:top-20 space-y-4">
+    <div class="bg-white rounded-2xl ring-1 ring-slate-200 shadow-sm p-5" aria-live="polite">
+      <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500">Podsumowanie</h2>
+      <div id="summary" class="mt-3 text-sm"></div>
+      <a href="#wezwanie" class="mt-4 block text-center rounded-xl bg-rose-700 hover:bg-rose-800 text-white font-semibold px-4 py-2.5 no-print">Przygotuj wezwanie do zapłaty</a>
+    </div>
+    <div class="rounded-2xl bg-amber-50 ring-1 ring-amber-200 p-4 text-sm text-amber-900">
+      <p class="font-bold">3 najczęstsze błędy pracodawców</p>
+      <ol class="mt-2 list-decimal pl-5 space-y-1.5">
+        <li>Podstawa tylko z pensji zasadniczej – bez premii, prowizji i nadgodzin.</li>
+        <li>Staż liczony do dnia wręczenia wypowiedzenia, a nie do końca umowy (8 lat i 1 dzień = 3× zamiast 2×).</li>
+        <li>Limit 15× płacy minimalnej z dnia wypowiedzenia zamiast z dnia rozwiązania umowy.</li>
+      </ol>
+    </div>
+  </aside>
+</main>
+
+<!-- ===================== TREŚCI EDUKACYJNE (SEO) ===================== -->
+<section id="wzory" class="mx-auto max-w-7xl px-4 py-10 scroll-mt-20">
+  <h2 class="text-2xl font-extrabold">Wzory i zasady 2026/2027 – jak liczymy</h2>
+  <div class="mt-6 grid gap-6 md:grid-cols-2">
+    <article class="bg-white rounded-2xl ring-1 ring-slate-200 p-5">
+      <h3 class="font-bold text-lg">Podstawa wymiaru (wspólna dla ekwiwalentu i odprawy)</h3>
+      <ul class="mt-3 space-y-2 text-sm text-slate-700 list-disc pl-5">
+        <li><b>Składniki stałe</b> (pensja zasadnicza, stałe dodatki) – w wysokości należnej w miesiącu rozwiązania umowy.</li>
+        <li><b>Składniki zmienne miesięczne</b> (premie regulaminowe, prowizje, nadgodziny) – średnia z 3 miesięcy poprzedzających miesiąc rozwiązania umowy, z ewentualnym dopełnieniem przy nieobecności: (suma ÷ dni przepracowane) × dni nominalne ÷ 3.</li>
+        <li><b>Składniki za okresy dłuższe niż miesiąc</b> (premie kwartalne, roczne) – średnia z 12 miesięcy (suma ÷ 12).</li>
+      </ul>
+    </article>
+    <article class="bg-white rounded-2xl ring-1 ring-slate-200 p-5">
+      <h3 class="font-bold text-lg">Ekwiwalent za urlop – współczynnik i zaokrąglenia</h3>
+      <p class="mt-3 text-sm text-slate-700">Współczynnik 2026 = (365 − 52 niedziele − 52 soboty − 10 świąt w inne dni niż niedziela) ÷ 12 = 251 ÷ 12 ≈ <b>20,92</b>. Dla części etatu współczynnik obniża się proporcjonalnie: 3/4 = 15,69; 1/2 = 10,46; 1/4 = 5,23. W 2025 r.: 20,83 (styczeń) i 20,75 (luty–grudzień, po ustanowieniu Wigilii dniem wolnym); w 2024 r.: 20,92; w 2027 r.: 20,92.</p>
+      <p class="mt-2 text-sm text-slate-700 font-mono bg-slate-50 rounded-lg p-3">stawka dzienna = zaokr.(podstawa ÷ (współczynnik × etat); 2)<br>stawka godzinowa = zaokr.(stawka dzienna ÷ norma dobowa; 2)<br>ekwiwalent = zaokr.(stawka godzinowa × godziny urlopu; 2)</p>
+    </article>
+    <article class="bg-white rounded-2xl ring-1 ring-slate-200 p-5">
+      <h3 class="font-bold text-lg">Odprawa – mnożnik i limit</h3>
+      <div class="mt-3 overflow-x-auto">
+        <table class="calc">
+          <thead><tr><th>Staż u pracodawcy (do dnia rozwiązania)</th><th>Odprawa</th></tr></thead>
+          <tbody>
+            <tr><td>krócej niż 2 lata</td><td>1 × podstawa</td></tr>
+            <tr><td>od 2 do 8 lat (włącznie z dokładnie 8 latami)</td><td>2 × podstawa</td></tr>
+            <tr><td>ponad 8 lat (już 8 lat i 1 dzień)</td><td>3 × podstawa</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-sm text-slate-700">Limit: 15 × minimalne wynagrodzenie z <b>dnia rozwiązania</b> umowy – 72 090 zł (2026, płaca minimalna 4806 zł) oraz 74 250 zł (2027, płaca minimalna 4950 zł wg rozporządzenia Rady Ministrów z 14 września 2026 r.). Wypowiedzenie 3-miesięczne doręczone w październiku 2026 r. kończy się 31 stycznia 2027 r. – obowiązuje wtedy wyższy limit 2027.</p>
+    </article>
+    <article class="bg-white rounded-2xl ring-1 ring-slate-200 p-5">
+      <h3 class="font-bold text-lg">Składki, podatek i termin wypłaty</h3>
+      <div class="mt-3 overflow-x-auto">
+        <table class="calc">
+          <thead><tr><th>Świadczenie</th><th>ZUS + zdrowotna</th><th>PIT</th></tr></thead>
+          <tbody>
+            <tr><td>Ekwiwalent za urlop</td><td>13,71% + 9%</td><td>12% / 32% (0% do 26 r.ż.)</td></tr>
+            <tr><td>Odprawa (art. 8 ustawy)</td><td>zwolniona</td><td>12% / 32% (0% do 26 r.ż.)</td></tr>
+            <tr><td>Odprawa emerytalno-rentowa</td><td>zwolniona</td><td>12% / 32% (0% do 26 r.ż.)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-sm text-slate-700">Od 27 stycznia 2026 r. ekwiwalent wypłaca się w terminie wypłaty wynagrodzenia, a gdy ten termin przypada przed dniem rozwiązania umowy – w ciągu 10 dni od rozwiązania (art. 171 § 4–5 K.p.). Niedopłata rodzi odsetki ustawowe za opóźnienie (art. 481 K.c. w zw. z art. 300 K.p.).</p>
+    </article>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section id="faq" class="mx-auto max-w-7xl px-4 pb-12 scroll-mt-20">
+  <h2 class="text-2xl font-extrabold">Najczęstsze pytania</h2>
+  <div class="mt-6 space-y-3">
+    <details class="bg-white rounded-2xl ring-1 ring-slate-200 p-5"><summary class="font-semibold flex justify-between gap-4">Ile wynosi współczynnik ekwiwalentowy w 2026 roku? <span class="chev transition">▾</span></summary><p class="mt-3 text-sm text-slate-700">Dla pełnego etatu 20,92: rok 2026 ma 251 dni pracy (365 dni minus 52 niedziele, 52 soboty i 10 świąt przypadających w inne dni niż niedziela, w tym Wigilia), a 251 / 12 = 20,92. Dla 3/4 etatu współczynnik wynosi 15,69, dla 1/2 etatu 10,46, a dla 1/4 etatu 5,23. Stosuje się współczynnik z roku, w którym ustał stosunek pracy – także do zaległego urlopu z lat poprzednich.</p></details>
+    <details class="bg-white rounded-2xl ring-1 ring-slate-200 p-5"><summary class="font-semibold flex justify-between gap-4">Jak obliczyć ekwiwalent za niewykorzystany urlop? <span class="chev transition">▾</span></summary><p class="mt-3 text-sm text-slate-700">Miesięczną podstawę dzieli się przez współczynnik (20,92 × wymiar etatu) i zaokrągla do groszy – to stawka dzienna. Stawkę dzienną dzieli się przez dobową normę czasu pracy (zwykle 8 godzin) i ponownie zaokrągla do groszy – to stawka godzinowa. Ekwiwalent brutto to stawka godzinowa pomnożona przez liczbę godzin niewykorzystanego urlopu.</p></details>
+    <details class="bg-white rounded-2xl ring-1 ring-slate-200 p-5"><summary class="font-semibold flex justify-between gap-4">Kiedy pracodawca musi wypłacić ekwiwalent za urlop od 27 stycznia 2026 r.? <span class="chev transition">▾</span></summary><p class="mt-3 text-sm text-slate-700">Zgodnie z art. 171 § 4 Kodeksu pracy ekwiwalent wypłaca się w terminie wypłaty wynagrodzenia obowiązującym u pracodawcy. Jeżeli ten termin przypada przed dniem rozwiązania umowy, ekwiwalent trzeba wypłacić w ciągu 10 dni od rozwiązania lub wygaśnięcia stosunku pracy (art. 171 § 5 K.p.).</p></details>
+    <details class="bg-white rounded-2xl ring-1 ring-slate-200 p-5"><summary class="font-semibold flex justify-between gap-4">Komu przysługuje odprawa z ustawy o zwolnieniach grupowych? <span class="chev transition">▾</span></summary><p class="mt-3 text-sm text-slate-700">Pracownikowi pracodawcy zatrudniającego co najmniej 20 pracowników, z którym umowę rozwiązano z przyczyn niedotyczących pracownika (np. likwidacja stanowiska, redukcja etatów) – w drodze wypowiedzenia przez pracodawcę albo porozumienia stron. Przy zwolnieniu indywidualnym przyczyny niedotyczące pracownika muszą być wyłącznym powodem rozwiązania umowy (art. 10 ust. 1 ustawy).</p></details>
+    <details class="bg-white rounded-2xl ring-1 ring-slate-200 p-5"><summary class="font-semibold flex justify-between gap-4">Ile wynosi odprawa i jaki jest maksymalny limit w 2026 i 2027 roku? <span class="chev transition">▾</span></summary><p class="mt-3 text-sm text-slate-700">Odprawa wynosi jednomiesięczne wynagrodzenie przy stażu u danego pracodawcy krótszym niż 2 lata, dwumiesięczne przy stażu od 2 do 8 lat i trzymiesięczne przy stażu ponad 8 lat. Nie może przekroczyć 15-krotności minimalnego wynagrodzenia obowiązującego w dniu rozwiązania stosunku pracy: 72 090 zł w 2026 r. (4806 zł × 15) i 74 250 zł w 2027 r. (4950 zł × 15).</p></details>
+    <details class="bg-white rounded-2xl ring-1 ring-slate-200 p-5"><summary class="font-semibold flex justify-between gap-4">Czy do stażu uprawniającego do odprawy wlicza się okres wypowiedzenia? <span class="chev transition">▾</span></summary><p class="mt-3 text-sm text-slate-700">Tak. Stosunek pracy trwa do ostatniego dnia okresu wypowiedzenia, więc staż liczy się do dnia rozwiązania umowy. Przekroczenie 8 lat choćby o jeden dzień oznacza odprawę trzymiesięczną zamiast dwumiesięcznej. Wlicza się także m.in. okres, za który przysługuje odszkodowanie za skrócone wypowiedzenie (art. 36¹ § 1 K.p.).</p></details>
+    <details class="bg-white rounded-2xl ring-1 ring-slate-200 p-5"><summary class="font-semibold flex justify-between gap-4">Czy od odprawy pobiera się składki ZUS i podatek? <span class="chev transition">▾</span></summary><p class="mt-3 text-sm text-slate-700">Odprawa z tytułu rozwiązania stosunku pracy z przyczyn niedotyczących pracownika oraz odprawa emerytalno-rentowa są zwolnione ze składek ZUS i składki zdrowotnej. Podlegają natomiast podatkowi PIT (12% lub 32%), z wyjątkiem osób do 26. roku życia objętych ulgą dla młodych (do 85 528 zł przychodu rocznie). Ekwiwalent za urlop podlega składkom ZUS, składce zdrowotnej i PIT.</p></details>
+    <details class="bg-white rounded-2xl ring-1 ring-slate-200 p-5"><summary class="font-semibold flex justify-between gap-4">Czy premie, prowizje i nadgodziny wchodzą do podstawy odprawy i ekwiwalentu? <span class="chev transition">▾</span></summary><p class="mt-3 text-sm text-slate-700">Tak. Składniki stałe uwzględnia się w wysokości należnej w miesiącu rozwiązania umowy, składniki zmienne za okresy nie dłuższe niż miesiąc (premie regulaminowe, prowizje, wynagrodzenie za nadgodziny) – w średniej z 3 miesięcy poprzedzających ten miesiąc, a składniki za okresy dłuższe (premie kwartalne, roczne) – w średniej z 12 miesięcy. Nie wlicza się m.in. nagród jubileuszowych, jednorazowych wypłat za określone osiągnięcie, wynagrodzenia chorobowego i dodatkowego wynagrodzenia rocznego.</p></details>
+    <details class="bg-white rounded-2xl ring-1 ring-slate-200 p-5"><summary class="font-semibold flex justify-between gap-4">Ile mam czasu na dochodzenie zaległej odprawy lub ekwiwalentu? <span class="chev transition">▾</span></summary><p class="mt-3 text-sm text-slate-700">Roszczenia ze stosunku pracy przedawniają się z upływem 3 lat od dnia, w którym stały się wymagalne (art. 291 § 1 Kodeksu pracy). Od niewypłaconej w terminie kwoty należą się odsetki ustawowe za opóźnienie – od 5 marca 2026 r. 9,25% w skali roku.</p></details>
+    <details class="bg-white rounded-2xl ring-1 ring-slate-200 p-5"><summary class="font-semibold flex justify-between gap-4">Czy kalkulator wysyła gdzieś moje dane? <span class="chev transition">▾</span></summary><p class="mt-3 text-sm text-slate-700">Nie. Wszystkie obliczenia i generowanie PDF odbywają się lokalnie w Twojej przeglądarce. Strona nie ładuje skryptów z zewnętrznych serwerów. Dane są zapamiętywane w pamięci tej przeglądarki tylko wtedy, gdy zaznaczysz taką opcję (numer konta nigdy), i możesz je w każdej chwili usunąć przyciskiem „Wyczyść dane”. Przy płatności za PDF formularz jest na chwilę przechowywany wyłącznie w pamięci bieżącej karty, a do serwera trafia tylko losowy identyfikator zamówienia.</p></details>
+  </div>
+</section>
+
+<!-- ===================== STOPKA ===================== -->
+<footer class="border-t border-slate-200 bg-white">
+  <div class="mx-auto max-w-7xl px-4 py-8 text-xs text-slate-500 space-y-3">
+    <p><b class="text-slate-700">Podstawa prawna:</b> art. 23¹, 30, 36¹, 92¹, 154, 155¹, 171, 264, 282, 291 i 300 ustawy z 26 czerwca 1974 r. – Kodeks pracy (w brzmieniu od 27.01.2026 r.); art. 8 i 10 ustawy z 13 marca 2003 r. o szczególnych zasadach rozwiązywania z pracownikami stosunków pracy z przyczyn niedotyczących pracowników; rozporządzenie MPiPS z 8 stycznia 1997 r. w sprawie szczegółowych zasad udzielania urlopu wypoczynkowego, ustalania i wypłacania wynagrodzenia za czas urlopu oraz ekwiwalentu pieniężnego za urlop; rozporządzenie MPiPS z 18 grudnia 1998 r. w sprawie szczegółowych zasad ustalania podstawy wymiaru składek (§ 2 ust. 1 pkt 2 i 3); rozporządzenia Rady Ministrów w sprawie minimalnego wynagrodzenia za pracę w 2026 r. (4806 zł) i w 2027 r. (4950 zł, z 14 września 2026 r.); art. 481 Kodeksu cywilnego.</p>
+    <p><b class="text-slate-700">Zastrzeżenie:</b> kalkulator ma charakter informacyjny i nie stanowi porady prawnej ani podatkowej. Wyniki zależą od wprowadzonych danych. Regulamin wynagradzania, układ zbiorowy lub umowa mogą przewidywać świadczenia korzystniejsze niż ustawowe. W sprawach spornych skonsultuj się z radcą prawnym, adwokatem lub Państwową Inspekcją Pracy.</p>
+    <p><b class="text-slate-700">Prywatność:</b> obliczenia i dokument PDF powstają wyłącznie w Twojej przeglądarce; nie wysyłamy wpisanych danych na żaden serwer, nie używamy plików cookie ani zewnętrznych skryptów. Dane zapisujemy w pamięci przeglądarki tylko na Twoje życzenie (bez numeru konta) oraz – na czas płatności – w pamięci bieżącej karty.</p>
+    <p class="flex flex-wrap gap-4"><button type="button" data-open="dlgTerms" class="underline hover:text-slate-800">Regulamin</button><button type="button" data-open="dlgPrivacy" class="underline hover:text-slate-800">Polityka prywatności</button></p>
+    <p>© <span id="year">2026</span> <span data-site-name>SprawdźOdprawę.pl</span> · Sprzedawca: <span data-seller="name">[imię i nazwisko / firma]</span> · Stan prawny: 24.10.2026 r. <span id="contactLine"></span></p>
+  </div>
+</footer>
+
+<!-- ===================== MODAL: PŁATNOŚĆ BLIK ===================== -->
+<dialog id="dlgCheckout" class="w-[min(520px,calc(100vw-2rem))] rounded-2xl p-0 shadow-2xl">
+  <div class="p-6 space-y-4" id="checkoutForm">
+    <div class="flex items-start justify-between gap-3">
+      <div>
+        <p class="text-xs font-bold uppercase text-emerald-700">Płatność</p>
+        <h2 class="text-xl font-extrabold text-slate-900">Przedsądowe wezwanie do zapłaty w PDF</h2>
+      </div>
+      <button type="button" data-close class="text-2xl leading-none text-slate-400 hover:text-slate-700" aria-label="Zamknij">×</button>
+    </div>
+    <div class="rounded-xl bg-slate-50 p-4 ring-1 ring-slate-200">
+      <div class="flex items-center justify-between gap-3"><span class="font-semibold">Wezwanie do zapłaty (PDF, A4)</span><span class="text-2xl font-extrabold"><span data-price>14,99 zł</span></span></div>
+      <p class="mt-1 text-sm text-emerald-800">Do odzyskania: <b id="coAmount" class="num"></b> + odsetki</p>
+      <ul class="mt-2 text-sm text-slate-600 list-disc pl-5">
+        <li>formalne pismo do pracodawcy z uzasadnieniem prawnym, gotowe do podpisu</li>
+        <li>załącznik z wyliczeniem krok po kroku (podstawa, ekwiwalent, odprawa, odsetki)</li>
+        <li>ponowne pobieranie poprawionych wersji przez 30 dni w tej przeglądarce</li>
+      </ul>
+    </div>
+    <div class="flex items-center gap-3 rounded-xl ring-1 ring-slate-200 p-3">
+      <span class="rounded-md bg-slate-900 px-2 py-1 text-sm font-black tracking-wider text-white">BLIK</span>
+      <span class="text-sm text-slate-600">Płatność BLIK obsługuje zewnętrzny operator płatności (Stripe). Nie podajesz nam danych płatniczych. Po opłaceniu wrócisz na tę stronę, a PDF pobierze się automatycznie.</span>
+    </div>
+    <label class="flex gap-2 text-sm"><input id="coTerms" type="checkbox" class="chk"> <span>Akceptuję <button type="button" data-open="dlgTerms" class="underline">Regulamin</button> i zapoznałem/am się z <button type="button" data-open="dlgPrivacy" class="underline">Polityką prywatności</button>.</span></label>
+    <label class="flex gap-2 text-sm"><input id="coWithdraw" type="checkbox" class="chk"> <span>Żądam dostarczenia treści cyfrowej (pliku PDF) przed upływem terminu do odstąpienia od umowy i przyjmuję do wiadomości, że wraz z rozpoczęciem jej dostarczania tracę prawo odstąpienia od umowy (art. 38 pkt 13 ustawy o prawach konsumenta).</span></label>
+    <p id="coError" class="text-sm font-semibold text-rose-700" role="alert" hidden></p>
+    <p id="coUnavailable" class="rounded-lg bg-slate-100 p-3 text-sm text-slate-700" hidden>Sprzedaż chwilowo niedostępna – nie pobraliśmy żadnych środków. Kalkulator, audyt i podgląd działają bezpłatnie.</p>
+    <p id="coDemo" class="rounded-lg bg-amber-50 p-3 text-sm text-amber-900 ring-1 ring-amber-200" hidden><strong>Tryb demonstracyjny (tylko na komputerze lokalnym):</strong> link płatności nie jest skonfigurowany, więc PDF zostanie pobrany bez opłaty. Na prawdziwej domenie ten tryb jest wyłączony.</p>
+    <button type="button" id="coPay" class="w-full rounded-xl bg-rose-700 hover:bg-rose-800 disabled:bg-slate-300 disabled:cursor-not-allowed px-5 py-3.5 text-lg font-extrabold text-white">Zamawiam z obowiązkiem zapłaty – <span data-price>14,99 zł</span></button>
+    <p class="text-center text-xs text-slate-500">Sprzedawca: <span data-seller="name">[uzupełnij dane sprzedawcy]</span></p>
+  </div>
+</dialog>
+
+<!-- ===================== MODAL: REGULAMIN ===================== -->
+<dialog id="dlgTerms" class="w-[min(760px,calc(100vw-2rem))] max-h-[85vh] rounded-2xl p-0 shadow-2xl">
+  <div class="p-6 text-sm text-slate-700 space-y-3">
+    <div class="flex items-start justify-between gap-3"><h2 class="text-xl font-extrabold text-slate-900">Regulamin serwisu</h2><button type="button" data-close class="text-2xl leading-none text-slate-400" aria-label="Zamknij">×</button></div>
+    <p><strong>§ 1. Usługodawca.</strong> Serwis <span data-site-name>SprawdźOdprawę.pl</span> dostępny pod adresem <span data-site-url>TWOJA-DOMENA.pl</span> prowadzi <span data-seller="name">[imię i nazwisko / firma]</span>, <span data-seller="address">[adres]</span>, e-mail: <span data-seller="email">[e-mail]</span><span data-seller="nipLine"></span> („Usługodawca”).</p>
+    <p><strong>§ 2. Usługi.</strong> 1. Bezpłatnie: kalkulator odprawy i ekwiwalentu za urlop, wyliczenie netto, audyt wypłaty z odsetkami oraz podgląd wezwania. 2. Odpłatnie: wygenerowanie pliku PDF przedsądowego wezwania do zapłaty z załącznikiem obliczeniowym, na podstawie danych wprowadzonych przez Użytkownika, w cenie <span data-price>14,99 zł</span> brutto. 3. Serwis ma charakter informacyjny i nie stanowi porady prawnej ani podatkowej. Usługodawca nie gwarantuje zapłaty przez pracodawcę ani określonego rozstrzygnięcia sądu; za prawdziwość i kompletność wprowadzonych danych odpowiada Użytkownik.</p>
+    <p><strong>§ 3. Wymagania techniczne.</strong> Urządzenie z dostępem do internetu, aktualna przeglądarka z włączoną obsługą JavaScript i pamięci przeglądarki oraz możliwość zapisu plików PDF.</p>
+    <p><strong>§ 4. Zawarcie umowy i płatność.</strong> Umowa o dostarczenie treści cyfrowej zostaje zawarta z chwilą złożenia zamówienia przyciskiem „Zamawiam z obowiązkiem zapłaty”. Płatności BLIK obsługuje zewnętrzny operator płatności (Stripe). Treść cyfrowa jest dostarczana niezwłocznie po potwierdzeniu płatności – przez pobranie pliku PDF w przeglądarce Użytkownika; ponowne pobieranie (także po poprawieniu danych) jest możliwe przez 30 dni w tej samej przeglądarce, w której złożono zamówienie.</p>
+    <p><strong>§ 5. Odstąpienie od umowy.</strong> Konsumentowi przysługuje prawo odstąpienia od umowy w terminie 14 dni. Zgodnie z art. 38 pkt 13 ustawy z dnia 30 maja 2014 r. o prawach konsumenta prawo to nie przysługuje, jeżeli dostarczanie treści cyfrowej rozpoczęło się za wyraźną i uprzednią zgodą konsumenta, który został poinformowany przed rozpoczęciem świadczenia, że po jego spełnieniu utraci prawo odstąpienia od umowy, i przyjął to do wiadomości, a Usługodawca przekazał potwierdzenie zawarcia umowy.</p>
+    <p><strong>§ 6. Reklamacje.</strong> Reklamacje, w tym dotyczące zgodności treści cyfrowej z umową, można składać na adres e-mail Usługodawcy. Usługodawca odpowiada na reklamację w terminie 14 dni od jej otrzymania.</p>
+    <p><strong>§ 7. Postanowienia końcowe.</strong> Do umów stosuje się prawo polskie. Konsument może skorzystać z pozasądowych sposobów rozpatrywania sporów, m.in. z pomocy miejskiego lub powiatowego rzecznika konsumentów albo Inspekcji Handlowej. Zasady przetwarzania danych określa Polityka prywatności.</p>
+    <p class="text-xs text-slate-400">Wzór regulaminu – właściciel serwisu powinien go zweryfikować i dostosować przed uruchomieniem sprzedaży.</p>
+  </div>
+</dialog>
+
+<!-- ===================== MODAL: POLITYKA PRYWATNOŚCI ===================== -->
+<dialog id="dlgPrivacy" class="w-[min(760px,calc(100vw-2rem))] max-h-[85vh] rounded-2xl p-0 shadow-2xl">
+  <div class="p-6 text-sm text-slate-700 space-y-3">
+    <div class="flex items-start justify-between gap-3"><h2 class="text-xl font-extrabold text-slate-900">Polityka prywatności</h2><button type="button" data-close class="text-2xl leading-none text-slate-400" aria-label="Zamknij">×</button></div>
+    <p><strong>Administrator.</strong> Administratorem danych jest <span data-seller="name">[imię i nazwisko / firma]</span>, <span data-seller="address">[adres]</span>, e-mail: <span data-seller="email">[e-mail]</span>.</p>
+    <p><strong>Dane w formularzach.</strong> Dane wpisywane do kalkulatora i generatora wezwania (w tym wynagrodzenie, dane pracodawcy i numer rachunku) są przetwarzane wyłącznie lokalnie w Twojej przeglądarce i nie są przesyłane do Administratora. Plik PDF jest generowany na Twoim urządzeniu. Formularz zapisujemy w pamięci przeglądarki (localStorage) tylko po zaznaczeniu „Zapamiętaj” – bez numeru rachunku. Na czas płatności pełny formularz (z numerem rachunku) jest przechowywany wyłącznie w pamięci bieżącej karty (sessionStorage) i znika po jej zamknięciu lub po kliknięciu „Wyczyść dane”.</p>
+    <p><strong>Płatności.</strong> Płatność obsługuje zewnętrzny operator płatności (Stripe), który przetwarza dane płatnicze jako odrębny administrator. Administrator otrzymuje od operatora dane transakcji (np. adres e-mail, kwotę, identyfikator płatności) w celu wykonania umowy (art. 6 ust. 1 lit. b RODO) oraz realizacji obowiązków podatkowych i rachunkowych (art. 6 ust. 1 lit. c RODO). W pamięci przeglądarki (localStorage) zapisywany jest wyłącznie losowy identyfikator zamówienia i identyfikator płatności – bez danych osobowych – i tylko te identyfikatory są wysyłane do serwera w celu potwierdzenia płatności.</p>
+    <p><strong>Hosting.</strong> Dostawca hostingu może rejestrować techniczne dane połączeń (np. adres IP, czas żądania) w celu zapewnienia bezpieczeństwa serwisu (art. 6 ust. 1 lit. f RODO).</p>
+    <p><strong>Linki zewnętrzne.</strong> Po kliknięciu linku do kancelarii partnerskiej lub Państwowej Inspekcji Pracy przechodzisz na ich stronę; dane przetwarzają one na podstawie własnych zasad.</p>
+    <p><strong>Twoje prawa.</strong> Przysługuje Ci prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia, sprzeciwu oraz skargi do Prezesa Urzędu Ochrony Danych Osobowych.</p>
+    <p class="text-xs text-slate-400">Wzór polityki – zaktualizuj ją, jeśli dodasz analitykę, piksele reklamowe lub newsletter.</p>
+  </div>
+</dialog>
+
+<div id="toast" class="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 rounded-xl bg-slate-900 px-4 py-3 text-sm text-white shadow-xl max-w-[calc(100vw-2rem)]" role="status" hidden></div>
+
+<script src="assets/config.js"></script>
+<script src="assets/calc.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
